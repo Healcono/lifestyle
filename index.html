@@ -1,0 +1,676 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>سبک زندگی</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap">
+<style>
+/* Layout: one calm column under a header carrying the center's emblem; palette taken from the logo (forest green + gold); single typeface (Vazirmatn) for all three languages */
+:root{
+  --bg:#F4F7F2; --surface:#FFFFFF; --ink:#13261A; --muted:#566B5C; --line:#DAE3D8;
+  --brand:#1E6332; --gold:#C2921C; --gold-soft:#F8EFD6;
+  --accent:#1E6332; --accent-soft:#E4F0E6; --on-accent:#FFFFFF;
+  --good:#2B7A3D; --warn:#B26A00; --bad:#BE3A2E;
+  --good-soft:#E1F1E5; --warn-soft:#FBF0D9; --bad-soft:#FBE4E1;
+  --font:'Vazirmatn',Tahoma,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0D1911; --surface:#14251A; --ink:#E7F0E8; --muted:#97AE9D; --line:#243A2A;
+  --brand:#5DBB78; --gold:#E2B54B; --gold-soft:#3A2F12;
+  --accent:#5DBB78; --accent-soft:#173A22; --on-accent:#08210F;
+  --good:#6CCB86; --warn:#E3A945; --bad:#EE7F72;
+  --good-soft:#163523; --warn-soft:#3A2E12; --bad-soft:#3E1D19; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0D1911; --surface:#14251A; --ink:#E7F0E8; --muted:#97AE9D; --line:#243A2A;
+  --brand:#5DBB78; --gold:#E2B54B; --gold-soft:#3A2F12;
+  --accent:#5DBB78; --accent-soft:#173A22; --on-accent:#08210F;
+  --good:#6CCB86; --warn:#E3A945; --bad:#EE7F72;
+  --good-soft:#163523; --warn-soft:#3A2E12; --bad-soft:#3E1D19; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.75;font-synthesis:none;
+  padding-block:0 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+button,input,select,textarea,summary,a{font-family:var(--font)}
+.wrap{max-width:760px;margin-inline:auto}
+.ico{width:1.25em;height:1.25em;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.25em}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-block:16px 12px;border-bottom:2px solid var(--gold)}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.emb{width:54px;height:43px;flex:none}
+.bn{font-weight:800;font-size:19px;line-height:1.3;color:var(--brand)}
+.bs{font-size:12.5px;color:var(--muted);line-height:1.4}
+.tools{display:flex;gap:6px;flex-wrap:wrap}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface)}
+.seg button{all:unset;cursor:pointer;padding:5px 12px;font-size:13px;font-weight:500;color:var(--muted);min-width:40px;text-align:center}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent)}
+.seg button:focus-visible,.btn:focus-visible,.opt:focus-within,input:focus-visible,select:focus-visible,.cp:focus-visible,.mode:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+main{padding-top:18px}
+h1{font-size:clamp(24px,5vw,34px);line-height:1.4;margin:6px 0 6px;font-weight:800;text-wrap:balance;color:var(--brand)}
+h2{font-size:19px;line-height:1.5;margin:0 0 8px;font-weight:800;text-wrap:balance}
+h3{font-size:16px;margin:0;font-weight:700;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+p{margin:0 0 10px}
+.lead{color:var(--muted);max-width:62ch}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px}
+.stack{display:flex;flex-direction:column;gap:14px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px}
+.mode{all:unset;cursor:pointer;display:block;border:1.5px solid var(--line);border-radius:12px;padding:16px;background:var(--surface);min-width:0}
+.mode[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.mode b{display:flex;gap:8px;align-items:center;font-size:16px;color:var(--brand)}
+.mode span{color:var(--muted);font-size:13px}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+label,.lbl{font-weight:700;font-size:14px}
+input[type=number],select{font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;width:100%;min-width:0}
+.hint{font-size:12.5px;color:var(--muted)}
+.btn{all:unset;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 22px;border-radius:11px;font-weight:700;background:var(--accent);color:var(--on-accent);text-align:center}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+[dir=ltr] .btn.back .ico,[dir=rtl] .btn.fwd .ico{transform:scaleX(-1)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.row.between{justify-content:space-between}
+.progress{height:6px;background:var(--line);border-radius:99px;overflow:hidden}
+.progress i{display:block;height:100%;background:var(--gold);transition:width .25s}
+.meta{display:flex;justify-content:space-between;gap:8px;font-size:13px;color:var(--muted);flex-wrap:wrap;align-items:center}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:2px 12px;border-radius:99px;font-size:12.5px;font-weight:700;background:var(--accent-soft);color:var(--accent)}
+.opts{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.opt{display:flex;align-items:center;gap:12px;border:1.5px solid var(--line);border-radius:11px;padding:11px 14px;cursor:pointer;background:var(--bg);min-width:0}
+.opt input{accent-color:var(--accent);width:18px;height:18px;flex:none;margin:0}
+.opt.on{border-color:var(--accent);background:var(--accent-soft)}
+.opt span{min-width:0;overflow-wrap:anywhere}
+.src{font-size:12px;color:var(--muted)}
+.src a{color:var(--accent)}
+.notice{display:flex;gap:10px;align-items:flex-start;border-radius:12px;padding:12px 14px;font-size:13.5px;background:var(--gold-soft);color:var(--ink);border:1px solid var(--line)}
+.notice .ico{color:var(--gold);margin-top:3px}
+/* results */
+.hero{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center}
+@media (max-width:520px){.hero{grid-template-columns:1fr;justify-items:center;text-align:center}}
+.ring text{font-family:var(--font);fill:var(--ink)}
+.verdict{display:inline-block;padding:4px 14px;border-radius:99px;font-weight:800;font-size:14px}
+.v-good{background:var(--good-soft);color:var(--good)}
+.v-warn{background:var(--warn-soft);color:var(--warn)}
+.v-bad{background:var(--bad-soft);color:var(--bad)}
+.dims{display:flex;flex-direction:column;gap:12px}
+.dim{display:grid;grid-template-columns:minmax(0,1fr) 54px;gap:4px 10px;align-items:center}
+.dn{display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0}
+.dn .ico{color:var(--brand)}
+.dim .bar{grid-column:1/-1;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.dim .bar i{display:block;height:100%;border-radius:99px}
+.dim .n{font-variant-numeric:tabular-nums;font-weight:800;text-align:end}
+.radar text{font-family:var(--font);fill:var(--muted);font-size:11px}
+.rec{border-inline-start:4px solid var(--line);padding:4px 14px;margin-block:10px}
+.rec h3 .ico{color:var(--brand)}
+.rec.bad{border-color:var(--bad)} .rec.warn{border-color:var(--warn)} .rec.good{border-color:var(--good)}
+.rec ul{margin:6px 0 0;padding-inline-start:20px}
+.rec li{margin-bottom:4px}
+details{border:1px solid var(--line);border-radius:12px;padding:12px 16px;background:var(--surface)}
+summary{cursor:pointer;font-weight:700}
+.scroll{overflow-x:auto}
+/* contact */
+footer{margin-top:28px;display:flex;flex-direction:column;gap:14px}
+.contact{display:grid;grid-template-columns:auto minmax(0,1fr);gap:18px;align-items:start;border-top:3px solid var(--gold)}
+@media (max-width:520px){.contact{grid-template-columns:1fr}}
+.clogo{width:96px;height:76px}
+.cname{font-weight:800;color:var(--brand);font-size:16px}
+.crow{display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;gap:8px;align-items:baseline}
+.crow .ico{color:var(--gold);align-self:center}
+.ck{color:var(--muted);font-size:13px}
+.cv{min-width:0;overflow-wrap:anywhere}
+.cp{all:unset;cursor:pointer;font-size:12.5px;font-weight:700;color:var(--accent);border:1px solid var(--line);border-radius:8px;padding:1px 10px}
+.fine{font-size:12.5px;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+<symbol id="emblem" viewBox="314 195 215 170">
+<path fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke="var(--brand)" stroke-opacity="1" stroke-miterlimit="10" d="M -0.00108691 0.00149296 L -18.488388 0.552944 L -20.377402 2.743105 L -23.84646 -14.046822 L -29.583898 16.271257 L -33.240684 -0.815906 L -36.252155 3.646546 L -37.257282 0.552944 L -51.403372 0.552944 " transform="matrix(0.998785, 0, 0, -0.998785, 446.547961, 301.149929)"/>
+<path fill-rule="nonzero" fill="var(--brand)" fill-opacity="1" d="M 435.710938 346.667969 C 435.710938 346.667969 456.058594 327.109375 505.84375 330.664062 L 500.3125 308.539062 C 500.3125 308.539062 503.277344 308.539062 505.84375 309.328125 L 515.921875 339.554688 C 515.921875 339.554688 482.335938 326.714844 435.710938 346.667969 M 508.28125 305.074219 C 505.21875 303.289062 498.582031 302.648438 498.582031 302.648438 L 497.046875 294.609375 C 463.347656 295.375 453.644531 311.203125 453.644531 311.203125 C 472.257812 298.265625 494.238281 299.96875 494.238281 299.96875 L 500.878906 325.246094 C 431.429688 324.480469 421.730469 358.691406 421.730469 358.691406 C 465.132812 328.820312 524.367188 346.691406 524.367188 346.691406 Z M 508.28125 305.074219 "/>
+<path fill-rule="nonzero" fill="var(--brand)" fill-opacity="1" d="M 327.539062 339.554688 L 337.613281 309.328125 C 340.179688 308.539062 343.144531 308.539062 343.144531 308.539062 L 337.613281 330.667969 C 387.398438 327.109375 407.75 346.667969 407.75 346.667969 C 361.125 326.714844 327.539062 339.554688 327.539062 339.554688 M 319.089844 346.691406 C 319.089844 346.691406 378.324219 328.820312 421.730469 358.691406 C 421.730469 358.691406 412.027344 324.480469 342.578125 325.246094 L 349.21875 299.96875 C 349.21875 299.96875 371.199219 298.265625 389.8125 311.203125 C 389.8125 311.203125 380.113281 295.375 346.410156 294.609375 L 344.878906 302.648438 C 344.878906 302.648438 338.238281 303.289062 335.175781 305.074219 Z M 319.089844 346.691406 "/>
+<path fill-rule="nonzero" fill="var(--brand)" fill-opacity="1" d="M 430.136719 336.988281 C 430.136719 336.988281 441.75 317.867188 459.816406 315.472656 C 459.816406 315.472656 443.59375 323.582031 430.136719 336.988281 "/>
+<path fill-rule="nonzero" fill="var(--brand)" fill-opacity="1" d="M 474.929688 317.867188 C 474.929688 317.867188 444.515625 319.34375 422.582031 351.234375 C 422.582031 351.234375 445.253906 325.609375 474.929688 317.867188 "/>
+<path fill-rule="nonzero" fill="var(--brand)" fill-opacity="1" d="M 413.320312 336.988281 C 413.320312 336.988281 401.707031 317.867188 383.640625 315.472656 C 383.640625 315.472656 399.863281 323.582031 413.320312 336.988281 "/>
+<path fill-rule="nonzero" fill="var(--brand)" fill-opacity="1" d="M 368.527344 317.867188 C 368.527344 317.867188 398.941406 319.34375 420.878906 351.234375 C 420.878906 351.234375 398.203125 325.609375 368.527344 317.867188 "/>
+<path fill-rule="nonzero" fill="var(--gold)" fill-opacity="1" d="M 421.730469 212.03125 C 462.835938 212.03125 496.511719 242.6875 499.683594 281.632812 C 499.847656 279.648438 499.953125 277.648438 499.953125 275.621094 C 499.953125 233.863281 464.929688 200.011719 421.730469 200.011719 C 378.527344 200.011719 343.503906 233.863281 343.503906 275.621094 C 343.503906 277.648438 343.609375 279.648438 343.773438 281.632812 C 346.945312 242.6875 380.621094 212.03125 421.730469 212.03125 "/>
+<path fill-rule="nonzero" fill="var(--brand)" fill-opacity="1" d="M 446.679688 271.289062 C 433.863281 260.496094 420.875 271.289062 420.875 271.289062 C 420.875 271.289062 407.890625 260.496094 395.074219 271.289062 C 382.253906 282.082031 390.351562 302.152344 390.351562 302.152344 C 390.351562 302.152344 394.902344 316.960938 414.804688 327.605469 C 414.804688 327.605469 392.878906 308.394531 393.050781 289.167969 C 393.21875 269.941406 412.277344 266.734375 420.875 277.53125 C 429.476562 266.734375 448.535156 269.941406 448.703125 289.167969 C 448.875 308.394531 426.949219 327.605469 426.949219 327.605469 C 446.851562 316.960938 451.402344 302.152344 451.402344 302.152344 C 451.402344 302.152344 459.5 282.082031 446.679688 271.289062 "/>
+<path fill-rule="nonzero" fill="var(--brand)" fill-opacity="1" d="M 420.878906 267.542969 C 420.878906 267.542969 416.117188 253.9375 410.941406 251.160156 L 407.875 254.523438 C 407.875 254.523438 417.199219 259.28125 420.878906 267.542969 "/>
+<path fill-rule="nonzero" fill="var(--brand)" fill-opacity="1" d="M 443.152344 243.019531 C 443.152344 243.019531 419.882812 239.566406 420.878906 262.765625 C 420.878906 262.765625 441.042969 267.367188 443.152344 243.019531 "/>
+</symbol>
+<symbol id="i-act" viewBox="0 0 24 24"><path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11"/></symbol>
+<symbol id="i-diet" viewBox="0 0 24 24"><path d="M12 7.5c-1.5-1.6-5-1.6-6.5 1.4-1.5 3 0 8 2.5 10.5 1.5 1.5 3 .6 4 .6s2.5.9 4-.6c2.5-2.5 4-7.5 2.5-10.5-1.5-3-5-3-6.5-1.4z"/><path d="M12 7.5c0-2 1-3.6 3-4.5"/></symbol>
+<symbol id="i-sleep" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
+<symbol id="i-tob" viewBox="0 0 24 24"><rect x="3" y="14" width="13" height="4" rx=".6"/><path d="M19.5 14v4M22 14v4M4 4l17 17"/></symbol>
+<symbol id="i-alc" viewBox="0 0 24 24"><path d="M7 3h10l-1 7a4 4 0 0 1-8 0L7 3zM12 14v7M8.5 21h7"/></symbol>
+<symbol id="i-mind" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.5a4.5 4.5 0 0 0 7 0M9 9.5h.01M15 9.5h.01"/></symbol>
+<symbol id="i-sed" viewBox="0 0 24 24"><path d="M7 3v9h10M7 12v9M17 12v9M7 17h10"/></symbol>
+<symbol id="i-body" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3.5"/><path d="M8 9.5a4 4 0 0 1 8 0M12 9.5l2.2-2.4"/></symbol>
+<symbol id="i-quick" viewBox="0 0 24 24"><path d="M13 3L5 14h6l-1 7 8-11h-6l1-7z"/></symbol>
+<symbol id="i-full" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 3h6v3H9zM9 11h6M9 15h6"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="i-dl" viewBox="0 0 24 24"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></symbol>
+<symbol id="i-redo" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"/></symbol>
+<symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol>
+
+</svg>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <svg class="emb" viewBox="0 0 215 170" aria-hidden="true"><use href="#emblem"/></svg>
+      <div><div class="bn" id="brandName"></div><div class="bs" id="brandSub"></div></div>
+    </div>
+    <div class="tools">
+      <div class="seg" id="langSeg" role="group" aria-label="Language"></div>
+      <div class="seg" id="themeSeg" role="group" aria-label="Theme"></div>
+    </div>
+  </header>
+  <main id="app" class="stack"></main>
+  <footer id="foot"></footer>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+// ---------- UI strings (fa / en / ar) ----------
+const LANGS={fa:{n:'فارسی',dir:'rtl',loc:'fa-IR'},en:{n:'EN',dir:'ltr',loc:'en-US'},ar:{n:'العربية',dir:'rtl',loc:'ar-EG'}};
+const UI={
+brand:{fa:'سبک زندگی',en:'Lifestyle',ar:'نمط الحياة'},
+alcPriv:{fa:'این پرسش فقط برای ارزیابی سلامت است، نه قضاوت. پاسخ شما فقط در همین مرورگر پردازش می‌شود و جایی ثبت یا ارسال نمی‌شود. می‌توانید آن را رد کنید.',en:'This question is only for health assessment, not judgement. Your answer is processed only in this browser and is never recorded or sent anywhere. You may skip it.',ar:'هذا السؤال لتقييم الصحة فقط وليس للحكم. تُعالَج إجابتك في هذا المتصفح فقط ولا تُسجَّل ولا تُرسَل إلى أي مكان. يمكنك تخطيه.'},
+alcSkip:{fa:'ترجیح می‌دهم پاسخ ندهم',en:'I prefer not to answer',ar:'أفضّل عدم الإجابة'},
+alcSkipNote:{fa:'بُعد الکل پاسخ داده نشد و در امتیاز کلی لحاظ نشده است؛ امتیاز بر پایه بقیه ابعاد محاسبه شد.',en:'You skipped the alcohol dimension, so it is left out and the score is based on the other dimensions.',ar:'تخطيت بُعد الكحول، لذا لم يُحتسب وبُنيت الدرجة على بقية الأبعاد.'},
+alcGen:{fa:'توصیه عمومی WHO: هیچ مقدار الکلی بدون اثر بر سلامت نیست و هرچه کمتر، ایمن‌تر. اگر نگرانی یا پرسشی دارید، گفتگو با پزشک محرمانه است.',en:'General WHO advice: no amount of alcohol is free of health effects, and the less the safer. If you have concerns or questions, a conversation with a doctor is confidential.',ar:'نصيحة عامة من المنظمة: لا توجد كمية من الكحول بلا أثر على الصحة، وكلما قلّ كان أسلم. إن كانت لديك مخاوف أو أسئلة فالحديث مع الطبيب سرّي.'},
+tagline:{fa:'ارزیابی سبک زندگی سالم',en:'Healthy lifestyle assessment',ar:'تقييم نمط الحياة الصحي'},
+center:{fa:'مرکز پژوهشی سلامت و سبک زندگی',en:'Health and Lifestyle Research Center',ar:'مركز أبحاث الصحة ونمط الحياة'},
+contactT:{fa:'ارتباط با ما',en:'Contact us',ar:'اتصل بنا'},
+builtBy:{fa:'این اپ توسط گروه پژوهشی سبک زندگی سالم مرکز پژوهشی سلامت و سبک زندگی ساخته شده است.',en:'This app was built by the Healthy Lifestyle research group of the Health and Lifestyle Research Center.',ar:'أعدّ هذا التطبيق فريق أبحاث نمط الحياة الصحي في مركز أبحاث الصحة ونمط الحياة.'},
+addrL:{fa:'نشانی',en:'Address',ar:'العنوان'},
+addr:{fa:'دانشکده علوم پزشکی، دانشگاه تربیت مدرس',en:'Faculty of Medical Sciences, Tarbiat Modares University',ar:'كلية العلوم الطبية، جامعة تربية مدرس'},
+emailL:{fa:'ایمیل',en:'Email',ar:'البريد'},
+telL:{fa:'تلفن',en:'Phone',ar:'الهاتف'},
+copy:{fa:'کپی',en:'Copy',ar:'نسخ'},copied:{fa:'کپی شد',en:'Copied',ar:'تم النسخ'},
+h1:{fa:'سبک زندگی شما چقدر سالم است؟',en:'How healthy is your lifestyle?',ar:'ما مدى صحة نمط حياتك؟'},
+lead:{fa:'پرسشنامه‌ای کوتاه بر پایه راهنماهای سازمان جهانی بهداشت و ابزارهای اعتبارسنجی‌شده. نتیجه شامل درصد کلی، وضعیت هشت بُعد و توصیه‌هایی با لینک منبع علمی است. پاسخ‌ها فقط در مرورگر شما پردازش می‌شوند و ذخیره نمی‌شوند.',
+ en:'A short questionnaire based on WHO guidance and validated screening tools. You get an overall percentage, eight dimension scores and advice with links to the scientific sources. Answers are processed only in your browser and are not stored.',
+ ar:'استبيان قصير مبني على إرشادات منظمة الصحة العالمية وأدوات فحص مُعتمدة. تحصل على نسبة مئوية عامة ودرجات لثمانية أبعاد وتوصيات مع روابط المصادر العلمية. تتم معالجة الإجابات في متصفحك فقط ولا تُحفظ.'},
+modeT:{fa:'نسخه پرسشنامه',en:'Questionnaire length',ar:'طول الاستبيان'},
+quick:{fa:'سریع',en:'Quick',ar:'سريع'},
+quickD:{fa:'۱۵ سؤال، حدود ۲ دقیقه. دقت کمتر',en:'15 questions, about 2 minutes. Lower precision',ar:'١٥ سؤالاً، نحو دقيقتين. دقة أقل'},
+full:{fa:'کامل',en:'Full',ar:'كامل'},
+fullD:{fa:'۳۰ سؤال، ۵ تا ۷ دقیقه. دقت بیشتر',en:'30 questions, 5 to 7 minutes. Higher precision',ar:'٣٠ سؤالاً، من ٥ إلى ٧ دقائق. دقة أعلى'},
+profileT:{fa:'اطلاعات پایه',en:'Basic details',ar:'معلومات أساسية'},
+age:{fa:'سن (سال)',en:'Age (years)',ar:'العمر (بالسنوات)'},
+sex:{fa:'جنسیت زیستی',en:'Sex',ar:'الجنس'},
+male:{fa:'مرد',en:'Male',ar:'ذكر'},female:{fa:'زن',en:'Female',ar:'أنثى'},
+specialT:{fa:'شرایط خاص (اختیاری)',en:'Special conditions (optional)',ar:'حالات خاصة (اختياري)'},
+pregnant:{fa:'باردار یا در دوره پس از زایمان هستم',en:'I am pregnant or postpartum',ar:'أنا حامل أو في فترة ما بعد الولادة'},
+chronic:{fa:'بیماری مزمن یا محدودیت جسمی دارم (مثل دیابت، فشار خون، بیماری قلبی)',en:'I have a chronic condition or disability (e.g. diabetes, hypertension, heart disease)',ar:'لدي مرض مزمن أو إعاقة (مثل السكري أو ضغط الدم أو أمراض القلب)'},
+specialD:{fa:'این گزینه‌ها امتیاز را کمی تعدیل می‌کنند و توصیه‌های ایمنی اضافه می‌شوند.',en:'These options adjust scoring slightly and add safety advice.',ar:'تُعدّل هذه الخيارات التقييم قليلاً وتضيف نصائح للسلامة.'},
+begin:{fa:'شروع',en:'Start',ar:'ابدأ'},next:{fa:'بعدی',en:'Next',ar:'التالي'},back:{fa:'قبلی',en:'Back',ar:'السابق'},
+finish:{fa:'مشاهده نتیجه',en:'See my result',ar:'عرض النتيجة'},
+qOf:{fa:'سؤال {a} از {b}',en:'Question {a} of {b}',ar:'السؤال {a} من {b}'},
+cm:{fa:'سانتی‌متر',en:'cm',ar:'سم'},kg:{fa:'کیلوگرم',en:'kg',ar:'كغ'},
+overall:{fa:'امتیاز کلی سبک زندگی',en:'Overall lifestyle score',ar:'الدرجة العامة لنمط الحياة'},
+range:{fa:'بازه تخمینی',en:'Estimated range',ar:'النطاق التقديري'},
+rangeNote:{fa:'پهنای بازه به نسخه پرسشنامه بستگی دارد (سریع ±۸، کامل ±۵) و یک تخمین مهندسی است، نه نتیجه اعتبارسنجی بالینی.',en:'The width depends on the version (quick ±8, full ±5) and is an engineering estimate, not a clinically validated interval.',ar:'يعتمد عرض النطاق على النسخة (سريع ±٨، كامل ±٥) وهو تقدير هندسي وليس نتيجة تحقق سريري.'},
+vHealthy:{fa:'سبک زندگی سالم',en:'Healthy lifestyle',ar:'نمط حياة صحي'},
+vMostly:{fa:'تقریباً سالم، با نقاط قابل بهبود',en:'Mostly healthy, with room to improve',ar:'صحي في معظمه مع جوانب قابلة للتحسين'},
+vModerate:{fa:'متوسط، نیازمند اصلاح',en:'Moderate, needs changes',ar:'متوسط ويحتاج إلى تعديل'},
+vPoor:{fa:'پرخطر، اصلاح فوری توصیه می‌شود',en:'High risk, changes strongly advised',ar:'عالي الخطورة، يُنصح بالتعديل العاجل'},
+vNote:{fa:'معیار «سالم»: امتیاز کلی حداقل ۷۰ و هیچ بُعد حیاتی (دخانیات، الکل، سلامت روان) در محدوده قرمز نباشد.',en:'"Healthy" means an overall score of at least 70 and no critical dimension (tobacco, alcohol, mental well-being) in the red zone.',ar:'يُعدّ «صحياً» إذا بلغت الدرجة العامة ٧٠ على الأقل ولم يكن أي بُعد حرج (التبغ، الكحول، الصحة النفسية) في المنطقة الحمراء.'},
+dimsT:{fa:'وضعیت در ابعاد سبک زندگی',en:'Your status by dimension',ar:'حالتك في كل بُعد'},
+radarT:{fa:'نمای کلی ابعاد',en:'Overview',ar:'نظرة عامة'},
+weight:{fa:'وزن در امتیاز کلی',en:'Weight in total',ar:'الوزن في الدرجة'},
+recT:{fa:'توصیه‌ها (با منبع علمی)',en:'Recommendations (with scientific sources)',ar:'التوصيات (مع المصادر العلمية)'},
+prio:{fa:'اولویت‌ها',en:'Priorities',ar:'الأولويات'},
+keep:{fa:'ادامه دهید',en:'Keep it up',ar:'واصل'},
+src:{fa:'منابع',en:'Sources',ar:'المصادر'},
+acc:{fa:'تاریخ دسترسی: ۲۰۲۶-۱۰-۲۹',en:'Accessed: 2026-10-29',ar:'تاريخ الاطلاع: 2026-10-29'},
+methodT:{fa:'روش محاسبه و شفافیت علمی',en:'How the score is calculated',ar:'كيف تُحسب الدرجة'},
+methodP:{fa:'هر پاسخ به نمره‌ای از ۰ تا ۱۰۰ تبدیل می‌شود، نمره هر بُعد میانگین پاسخ‌های همان بُعد است و امتیاز کلی میانگین وزنی ابعاد است. آستانه‌ها از منابع بالا گرفته شده‌اند. در دخانیات و الکل، مصرف فعلی سقف امتیاز را پایین می‌آورد، چون این رفتارها اثر خطی و قابل‌جبران با سایر ابعاد ندارند.',en:'Each answer becomes a 0 to 100 score, each dimension is the mean of its answers, and the overall score is a weighted mean of the dimensions. Thresholds come from the sources listed. For tobacco and alcohol, current use caps the score, because these risks cannot be offset by good habits elsewhere.',ar:'تتحول كل إجابة إلى درجة من ٠ إلى ١٠٠، ودرجة كل بُعد هي متوسط إجاباته، والدرجة العامة هي المتوسط الموزون للأبعاد. العتبات مأخوذة من المصادر المذكورة. في التبغ والكحول يخفض الاستخدام الحالي سقف الدرجة لأن هذه المخاطر لا تعوّضها العادات الجيدة الأخرى.'},
+limits:{fa:'محدودیت‌ها: داده‌ها خودگزارشی هستند؛ در نسخه سریع برخی ابزارها (مثل WHO-5 و AUDIT-C) کوتاه‌شده‌اند؛ اوزان ابعاد تصمیم طراحی‌اند و از یک مدل بالینی واحد نیامده‌اند؛ بعضی آستانه‌ها (مثل نشستن) در WHO عدد مشخصی ندارند.',en:'Limits: data are self-reported; the quick version shortens some tools (WHO-5, AUDIT-C); dimension weights are a design choice, not from a single clinical model; some thresholds (such as sitting time) have no numeric WHO cut-off.',ar:'القيود: البيانات مُبلَّغ عنها ذاتياً؛ تختصر النسخة السريعة بعض الأدوات (WHO-5 وAUDIT-C)؛ أوزان الأبعاد قرار تصميمي وليست من نموذج سريري واحد؛ بعض العتبات (مثل الجلوس) ليس لها رقم محدد لدى المنظمة.'},
+disc:{fa:'این ابزار آموزشی و غربالگری است، نه تشخیص یا جایگزین مشاوره پزشکی. اگر علائم نگران‌کننده یا بیماری دارید با پزشک مشورت کنید.',en:'This is an educational screening tool, not a diagnosis or a substitute for medical advice. See a clinician if you have symptoms or a medical condition.',ar:'هذه أداة تثقيفية للفحص وليست تشخيصاً ولا بديلاً عن الاستشارة الطبية. استشر الطبيب إن كانت لديك أعراض أو مرض.'},
+pdf:{fa:'دانلود گزارش PDF',en:'Download PDF report',ar:'تنزيل تقرير PDF'},
+pdfBusy:{fa:'در حال ساخت PDF…',en:'Building PDF…',ar:'جارٍ إنشاء PDF…'},
+pdfFail:{fa:'ساخت یا ذخیره PDF ممکن نشد. دوباره تلاش کنید.',en:'The PDF could not be built or saved. Try again.',ar:'تعذّر إنشاء PDF أو حفظه. حاول مرة أخرى.'},
+pdfNA:{fa:'دانلود در این نمایش در دسترس نیست.',en:'Downloads are not available in this view.',ar:'التنزيل غير متاح في هذا العرض.'},
+again:{fa:'شروع دوباره',en:'Start over',ar:'ابدأ من جديد'},
+flagMental:{fa:'نمره سلامت روان در محدوده نیازمند توجه است. این غربالگری تشخیص نیست؛ گفتگو با یک متخصص سلامت روان یا پزشک را در نظر بگیرید.',en:'Your well-being score is in the range that warrants attention. This is a screen, not a diagnosis; consider speaking with a mental health professional or doctor.',ar:'درجة الصحة النفسية في نطاق يستدعي الانتباه. هذا فحص وليس تشخيصاً؛ فكّر في التحدث إلى مختص نفسي أو طبيب.'},
+chronicNote:{fa:'به دلیل بیماری مزمن یا محدودیت: پیش از شروع یا افزایش فعالیت بدنی و هر تغییر عمده رژیم با پزشک خود مشورت کنید. راهنمای WHO برای افراد دارای بیماری مزمن توصیه‌های ویژه دارد.',en:'Because of a chronic condition or disability: check with your doctor before starting or increasing exercise or making major diet changes. WHO guidance has specific recommendations for people living with chronic conditions.',ar:'بسبب مرض مزمن أو إعاقة: استشر طبيبك قبل بدء النشاط البدني أو زيادته أو إجراء تغييرات كبيرة في النظام الغذائي. لدى المنظمة توصيات خاصة للمصابين بأمراض مزمنة.'},
+pregNote:{fa:'در بارداری و پس از زایمان، BMI و دور کمر در امتیاز لحاظ نشده‌اند و WHO فعالیت بدنی منظم و مناسب را توصیه می‌کند. درباره الکل، مقدار بی‌خطری در بارداری شناخته نشده است؛ بهتر است درباره آن با مراقب سلامت خود راحت و بی‌نگرانی صحبت کنید.',en:'In pregnancy and postpartum, BMI and waist are left out of the score, and WHO recommends regular, suitable physical activity. For alcohol, no safe amount is known in pregnancy; it is best to talk about it openly with your health care provider, without worry.',ar:'في الحمل وما بعد الولادة لا تدخل كتلة الجسم ومحيط الخصر في الدرجة، وتوصي المنظمة بنشاط بدني منتظم ومناسب. أما الكحول فلا توجد كمية معروفة بأنها آمنة أثناء الحمل؛ والأفضل التحدث عن ذلك بصراحة وبلا قلق مع مقدم الرعاية الصحية.'},
+quickNote:{fa:'نسخه سریع دقت کمتری دارد. برای نتیجه دقیق‌تر نسخه کامل را پر کنید.',en:'The quick version is less precise. Take the full version for a more reliable result.',ar:'النسخة السريعة أقل دقة. أكمل النسخة الكاملة لنتيجة أدق.'},
+};
+const DIMS={
+act:{fa:'فعالیت بدنی',en:'Physical activity',ar:'النشاط البدني',w:20},
+diet:{fa:'تغذیه',en:'Nutrition',ar:'التغذية',w:18},
+sleep:{fa:'خواب',en:'Sleep',ar:'النوم',w:12},
+tob:{fa:'دخانیات',en:'Tobacco',ar:'التبغ',w:15},
+alc:{fa:'الکل',en:'Alcohol',ar:'الكحول',w:10},
+mind:{fa:'سلامت روان',en:'Mental well-being',ar:'الصحة النفسية',w:12},
+sed:{fa:'کم‌تحرکی',en:'Sedentary time',ar:'السلوك الخامل',w:5},
+body:{fa:'تن‌سنجی و پیشگیری',en:'Body measures & prevention',ar:'قياسات الجسم والوقاية',w:8},
+};
+const CRITICAL=['tob','alc','mind'];
+// ---------- Sources (links verified by web search on 2026-10-29 unless noted) ----------
+const SRC={
+who_pa:{t:'Bull FC et al. WHO 2020 guidelines on physical activity and sedentary behaviour. Br J Sports Med 2020;54:1451-62',u:'https://doi.org/10.1136/bjsports-2020-102955'},
+who_pa_fs:{t:'WHO fact sheet: Physical activity',u:'https://www.who.int/news-room/fact-sheets/detail/physical-activity'},
+who_diet:{t:'WHO fact sheet: Healthy diet',u:'https://www.who.int/news-room/fact-sheets/detail/healthy-diet'},
+who_nut_eu:{t:'WHO Europe: Nutrition, maintaining a healthy lifestyle',u:'https://who.int/europe/news-room/fact-sheets/item/nutrition---maintaining-a-healthy-lifestyle'},
+sleep:{t:'Watson NF et al. Recommended amount of sleep for a healthy adult (AASM and SRS consensus). Sleep 2015',u:'https://aasm.org/aasm-and-srs-publish-new-sleep-duration-consensus-statement/'},
+who_tob:{t:'WHO fact sheet: Tobacco',u:'https://www.who.int/news-room/fact-sheets/detail/tobacco'},
+who_quit:{t:'WHO Q&A: Health benefits of smoking cessation',u:'https://www.who.int/news-room/questions-and-answers/item/tobacco-health-benefits-of-smoking-cessation'},
+who_alc:{t:'WHO: No level of alcohol consumption is safe for our health (2023)',u:'https://www.who.int/azerbaijan/news/item/04-01-2023-no-level-of-alcohol-consumption-is-safe-for-our-health'},
+audit:{t:'WHO AUDIT scoring (8-14 hazardous or harmful, 15+ likely dependence)',u:'https://auditscreen.org/about/scoring-audit/'},
+auditc:{t:'Bush K et al. The AUDIT alcohol consumption questions (AUDIT-C). Arch Intern Med 1998;158:1789-95',u:'https://doi.org/10.1001/archinte.158.16.1789'},
+who5:{t:'Topp CW et al. The WHO-5 Well-Being Index: a systematic review. Psychother Psychosom 2015;84:167-76',u:'https://doi.org/10.1159/000376585'},
+waist:{t:'Lean MEJ et al. Waist circumference as a measure for indicating need for weight management. BMJ 1995;311:158-61',u:'https://pubmed.ncbi.nlm.nih.gov/7613427/'},
+who_obes:{t:'WHO Global Health Observatory: Body mass index',u:'https://www.who.int/data/gho/data/themes/topics/topic-details/GHO/body-mass-index'},
+};
+// ---------- Questions. O(v, fa, en, ar): v = raw value used by scoring ----------
+const O=(v,fa,en,ar)=>({v,t:{fa,en,ar}});
+const T=(fa,en,ar)=>({fa,en,ar});
+const W5=[O(0,'هیچ‌وقت','At no time','في أي وقت'),O(1,'بخشی از زمان','Some of the time','بعض الوقت'),O(2,'کمتر از نیمی از زمان','Less than half of the time','أقل من نصف الوقت'),O(3,'بیش از نیمی از زمان','More than half of the time','أكثر من نصف الوقت'),O(4,'بیشتر زمان','Most of the time','معظم الوقت'),O(5,'همیشه','All of the time','طوال الوقت')];
+const FREQ4=(a,b,c,d)=>[O(a,'هرگز','Never','أبداً'),O(b,'گاهی (ماهی چند بار)','Sometimes (a few times a month)','أحياناً (عدة مرات شهرياً)'),O(c,'اغلب (هفته‌ای چند بار)','Often (a few times a week)','غالباً (عدة مرات أسبوعياً)'),O(d,'تقریباً هر روز','Almost daily','شبه يومي')];
+const QS=[
+// ---- physical activity ----
+{id:'mod',dim:'act',quick:1,t:T('در یک هفته معمول، چند دقیقه فعالیت بدنی متوسط دارید؟ (پیاده‌روی تند، دوچرخه‌سواری آرام، کارهای سنگین خانه)','In a typical week, how many minutes of moderate activity do you do? (brisk walking, easy cycling, heavy housework)','في أسبوع عادي، كم دقيقة تمارس نشاطاً بدنياً متوسط الشدة؟ (مشي سريع، ركوب دراجة هادئ، أعمال منزلية شاقة)'),
+ opts:[O(0,'هیچ','None','لا شيء'),O(30,'کمتر از ۶۰ دقیقه','Under 60 min','أقل من ٦٠ دقيقة'),O(100,'۶۰ تا ۱۴۹ دقیقه','60 to 149 min','٦٠ إلى ١٤٩ دقيقة'),O(220,'۱۵۰ تا ۲۹۹ دقیقه','150 to 299 min','١٥٠ إلى ٢٩٩ دقيقة'),O(320,'۳۰۰ دقیقه یا بیشتر','300 min or more','٣٠٠ دقيقة أو أكثر')],src:['who_pa']},
+{id:'vig',dim:'act',quick:1,t:T('در یک هفته معمول، چند دقیقه فعالیت بدنی شدید دارید؟ (دویدن، دوچرخه‌سواری سریع، ورزش‌های توپی رقابتی)','In a typical week, how many minutes of vigorous activity do you do? (running, fast cycling, competitive ball sports)','في أسبوع عادي، كم دقيقة تمارس نشاطاً بدنياً شديداً؟ (جري، ركوب دراجة سريع، رياضات كرة تنافسية)'),
+ opts:[O(0,'هیچ','None','لا شيء'),O(15,'کمتر از ۳۰ دقیقه','Under 30 min','أقل من ٣٠ دقيقة'),O(50,'۳۰ تا ۷۴ دقیقه','30 to 74 min','٣٠ إلى ٧٤ دقيقة'),O(110,'۷۵ تا ۱۴۹ دقیقه','75 to 149 min','٧٥ إلى ١٤٩ دقيقة'),O(170,'۱۵۰ دقیقه یا بیشتر','150 min or more','١٥٠ دقيقة أو أكثر')],src:['who_pa']},
+{id:'str',dim:'act',quick:1,t:T('در هفته چند روز تمرین تقویت عضلات دارید؟ (وزنه، کار با وزن بدن، کشش مقاومتی)','On how many days a week do you do muscle-strengthening exercise? (weights, bodyweight work, resistance bands)','في كم يوماً أسبوعياً تمارس تمارين تقوية العضلات؟ (أوزان، تمارين بوزن الجسم، أشرطة مقاومة)'),
+ opts:[O(0,'هیچ روز','None','لا يوم'),O(1,'۱ روز','1 day','يوم واحد'),O(2,'۲ روز','2 days','يومان'),O(3,'۳ روز یا بیشتر','3 days or more','٣ أيام أو أكثر')],src:['who_pa']},
+{id:'walk',dim:'act',quick:0,t:T('روزانه چند دقیقه برای رفت‌وآمد پیاده یا با دوچرخه حرکت می‌کنید؟','How many minutes a day do you walk or cycle to get around?','كم دقيقة يومياً تمشي أو تركب الدراجة للتنقل؟'),
+ opts:[O(0,'کمتر از ۱۰ دقیقه','Under 10 min','أقل من ١٠ دقائق'),O(20,'۱۰ تا ۲۹ دقیقه','10 to 29 min','١٠ إلى ٢٩ دقيقة'),O(45,'۳۰ تا ۵۹ دقیقه','30 to 59 min','٣٠ إلى ٥٩ دقيقة'),O(75,'۶۰ دقیقه یا بیشتر','60 min or more','٦٠ دقيقة أو أكثر')],src:['who_pa']},
+// ---- nutrition ----
+{id:'fv',dim:'diet',quick:1,t:T('روزانه چند وعده میوه و سبزی می‌خورید؟ (هر وعده حدود ۸۰ گرم، یعنی یک مشت؛ سیب‌زمینی حساب نمی‌شود)','How many portions of fruit and vegetables do you eat a day? (one portion is about 80 g, roughly a handful; potatoes do not count)','كم حصة من الفاكهة والخضروات تتناول يومياً؟ (الحصة نحو ٨٠ غراماً أي حفنة تقريباً؛ لا تُحسب البطاطا)'),
+ opts:[O(0.5,'۰ یا ۱ وعده','0 or 1','٠ أو ١'),O(2,'۲ وعده','2','٢'),O(3,'۳ وعده','3','٣'),O(4,'۴ وعده','4','٤'),O(5,'۵ وعده یا بیشتر','5 or more','٥ أو أكثر')],src:['who_diet']},
+{id:'sug',dim:'diet',quick:1,t:T('چند وقت یک‌بار نوشیدنی شیرین (نوشابه، آب‌میوه صنعتی، شربت) یا شیرینی و شکلات می‌خورید؟','How often do you have sugary drinks (soda, packaged juice, syrups) or sweets?','كم مرة تتناول مشروبات محلاة (مشروبات غازية، عصائر معبأة، شراب) أو حلويات؟'),
+ opts:[O(100,'تقریباً هرگز','Rarely or never','نادراً أو أبداً'),O(75,'۱ تا ۳ بار در هفته','1 to 3 times a week','١ إلى ٣ مرات أسبوعياً'),O(45,'تقریباً هر روز یک بار','About once a day','مرة يومياً تقريباً'),O(15,'چند بار در روز','Several times a day','عدة مرات يومياً')],src:['who_diet']},
+{id:'legume',dim:'diet',quick:0,t:T('چند وقت یک‌بار حبوبات، مغزها یا غلات کامل (نان سبوس‌دار، جو، برنج قهوه‌ای) می‌خورید؟','How often do you eat legumes, nuts or whole grains (wholemeal bread, oats, brown rice)?','كم مرة تتناول البقوليات أو المكسرات أو الحبوب الكاملة (خبز أسمر، شوفان، أرز بني)؟'),
+ opts:[O(100,'هر روز','Every day','يومياً'),O(80,'۴ تا ۶ بار در هفته','4 to 6 times a week','٤ إلى ٦ مرات أسبوعياً'),O(50,'۱ تا ۳ بار در هفته','1 to 3 times a week','١ إلى ٣ مرات أسبوعياً'),O(15,'به ندرت','Rarely','نادراً')],src:['who_diet']},
+{id:'fish',dim:'diet',quick:0,t:T('چند بار در هفته ماهی یا غذای دریایی می‌خورید؟','How many times a week do you eat fish or seafood?','كم مرة أسبوعياً تتناول السمك أو المأكولات البحرية؟'),
+ opts:[O(100,'۲ بار یا بیشتر','2 or more','مرتان أو أكثر'),O(70,'۱ بار','Once','مرة واحدة'),O(35,'ماهی یک یا دو بار','Once or twice a month','مرة أو مرتين شهرياً'),O(15,'تقریباً هرگز','Almost never','تقريباً أبداً')],src:['who_diet']},
+{id:'procf',dim:'diet',quick:0,t:T('چند وقت یک‌بار فست‌فود یا غذای فرآوری‌شده و چرب (سوسیس، چیپس، سرخ‌کردنی) می‌خورید؟','How often do you eat fast food or fatty processed food (sausages, chips, fried food)?','كم مرة تتناول الوجبات السريعة أو الأطعمة المصنعة الدهنية (نقانق، رقائق البطاطس، المقليات)؟'),
+ opts:[O(100,'تقریباً هرگز','Rarely or never','نادراً أو أبداً'),O(70,'۱ تا ۲ بار در هفته','1 to 2 times a week','١ إلى ٢ أسبوعياً'),O(35,'۳ تا ۵ بار در هفته','3 to 5 times a week','٣ إلى ٥ أسبوعياً'),O(10,'تقریباً هر روز','Almost daily','شبه يومي')],src:['who_diet']},
+{id:'salt',dim:'diet',quick:0,t:T('چقدر غذای شور یا پرنمک (ترشی، کنسرو، فرآورده‌های گوشتی) می‌خورید یا نمک اضافه می‌کنید؟','How much salty food (pickles, canned food, processed meats) do you eat, or how much salt do you add at the table?','كم تتناول من الأطعمة المالحة (مخللات، معلبات، لحوم مصنعة) أو تضيف الملح على المائدة؟'),
+ opts:[O(100,'کم، معمولاً نمک اضافه نمی‌کنم','Little, I seldom add salt','قليلاً، نادراً ما أضيف الملح'),O(65,'متوسط','Moderate','متوسط'),O(30,'زیاد','A lot','كثيراً'),O(10,'بسیار زیاد، همیشه نمک اضافه می‌کنم','Very much, I always add salt','كثيراً جداً، أضيف الملح دائماً')],src:['who_diet']},
+// ---- sleep ----
+{id:'sh',dim:'sleep',quick:1,t:T('در شبانه‌روز معمولاً چند ساعت می‌خوابید؟','How many hours do you usually sleep in 24 hours?','كم ساعة تنام عادةً في اليوم؟'),
+ opts:[O(15,'کمتر از ۵ ساعت','Under 5 h','أقل من ٥ ساعات'),O(40,'۵ تا کمتر از ۶ ساعت','5 to under 6 h','٥ إلى أقل من ٦'),O(70,'۶ تا کمتر از ۷ ساعت','6 to under 7 h','٦ إلى أقل من ٧'),O(100,'۷ تا ۹ ساعت','7 to 9 h','٧ إلى ٩ ساعات'),O(80,'بیش از ۹ ساعت','Over 9 h','أكثر من ٩ ساعات')],src:['sleep']},
+{id:'sq',dim:'sleep',quick:1,t:T('کیفیت خواب خود را چگونه ارزیابی می‌کنید؟ (آسان به خواب رفتن، بیدار نشدن‌های مکرر، احساس استراحت صبحگاهی)','How would you rate your sleep quality? (falling asleep easily, few awakenings, feeling rested)','كيف تقيّم جودة نومك؟ (سهولة النوم، قلة الاستيقاظ، الشعور بالراحة صباحاً)'),
+ opts:[O(100,'عالی','Very good','ممتازة'),O(80,'خوب','Good','جيدة'),O(50,'متوسط','Fair','متوسطة'),O(20,'ضعیف','Poor','ضعيفة'),O(0,'بسیار ضعیف','Very poor','سيئة جداً')],src:['sleep']},
+{id:'sreg',dim:'sleep',quick:0,t:T('ساعت خواب و بیداری شما چقدر منظم است؟ (اختلاف کمتر از یک ساعت)','How regular are your sleep and wake times? (within about one hour)','ما مدى انتظام مواعيد نومك واستيقاظك؟ (فرق أقل من ساعة)'),
+ opts:[O(100,'تقریباً همیشه منظم','Almost always regular','منتظمة دائماً تقريباً'),O(70,'بیشتر وقت‌ها','Mostly','في الغالب'),O(40,'گاهی','Sometimes','أحياناً'),O(15,'به ندرت','Rarely','نادراً')],src:['sleep']},
+// ---- tobacco ----
+{id:'ts',dim:'tob',quick:1,t:T('وضعیت مصرف دخانیات شما چیست؟ (سیگار، قلیان، پیپ، سیگار الکترونیک و محصولات تنباکویی)','What is your tobacco use? (cigarettes, waterpipe, pipe, e-cigarettes and other tobacco products)','ما وضعك مع التبغ؟ (سجائر، نرجيلة، غليون، سجائر إلكترونية ومنتجات التبغ الأخرى)'),
+ opts:[O(100,'هرگز مصرف نکرده‌ام','Never used','لم أستخدمه قط'),O(90,'ترک کرده‌ام (بیش از ۱ سال)','Quit more than a year ago','أقلعت منذ أكثر من سنة'),O(65,'ترک کرده‌ام (کمتر از ۱ سال)','Quit under a year ago','أقلعت منذ أقل من سنة'),O(30,'گاهی مصرف می‌کنم','Occasional user','أستخدمه أحياناً'),O(5,'هر روز مصرف می‌کنم','Daily user','أستخدمه يومياً')],src:['who_tob','who_quit']},
+{id:'tq',dim:'tob',quick:0,t:T('اگر مصرف می‌کنید، روزانه چند نخ سیگار یا معادل آن (یک وعده قلیان تقریباً ۱۰ نخ)؟ اگر مصرف نمی‌کنید «هیچ» را بزنید.','If you use tobacco, how many cigarettes a day or equivalent (one waterpipe session is roughly 10)? Choose "None" if you do not.','إن كنت تستخدم التبغ فكم سيجارة يومياً أو ما يعادلها (جلسة نرجيلة ≈ ١٠)؟ اختر «لا شيء» إن كنت لا تستخدمه.'),
+ opts:[O(100,'هیچ','None','لا شيء'),O(25,'۱ تا ۹ نخ','1 to 9','١ إلى ٩'),O(10,'۱۰ تا ۱۹ نخ','10 to 19','١٠ إلى ١٩'),O(0,'۲۰ نخ یا بیشتر','20 or more','٢٠ أو أكثر')],src:['who_tob']},
+{id:'tsh',dim:'tob',quick:0,t:T('چقدر در معرض دود دست‌دوم دخانیات هستید؟ (خانه، محل کار، کافه)','How often are you exposed to second-hand tobacco smoke? (home, work, cafés)','كم مرة تتعرض لدخان التبغ السلبي؟ (المنزل، العمل، المقاهي)'),
+ opts:[O(100,'هرگز','Never','أبداً'),O(60,'گاهی','Occasionally','أحياناً'),O(20,'تقریباً هر روز','Almost daily','شبه يومي')],src:['who_tob']},
+// ---- alcohol (AUDIT-C) ----
+{id:'af',dim:'alc',quick:1,t:T('چند وقت یک‌بار نوشیدنی الکلی مصرف می‌کنید؟','How often do you have a drink containing alcohol?','كم مرة تتناول مشروباً كحولياً؟'),
+ opts:[O(0,'هرگز','Never','أبداً'),O(1,'ماهی یک بار یا کمتر','Monthly or less','شهرياً أو أقل'),O(2,'۲ تا ۴ بار در ماه','2 to 4 times a month','٢ إلى ٤ مرات شهرياً'),O(3,'۲ تا ۳ بار در هفته','2 to 3 times a week','٢ إلى ٣ مرات أسبوعياً'),O(4,'۴ بار یا بیشتر در هفته','4 or more times a week','٤ مرات أو أكثر أسبوعياً')],src:['who_alc','auditc']},
+{id:'aq',dim:'alc',quick:1,t:T('در روزی که مصرف می‌کنید، معمولاً چند واحد؟ (یک واحد ≈ یک شیشه آبجو کوچک، یک گیلاس شراب یا یک شات). اگر مصرف نمی‌کنید اولین گزینه را بزنید.','On a day you drink, how many standard drinks (a small beer, a glass of wine or a shot)? If you do not drink, pick the first option.','في اليوم الذي تشرب فيه، كم مشروباً قياسياً (بيرة صغيرة أو كأس نبيذ أو جرعة)؟ إن كنت لا تشرب فاختر الخيار الأول.'),
+ opts:[O(0,'۱ تا ۲ واحد (یا مصرف نمی‌کنم)','1 or 2 (or I do not drink)','١ أو ٢ (أو لا أشرب)'),O(1,'۳ تا ۴','3 or 4','٣ أو ٤'),O(2,'۵ تا ۶','5 or 6','٥ أو ٦'),O(3,'۷ تا ۹','7 to 9','٧ إلى ٩'),O(4,'۱۰ یا بیشتر','10 or more','١٠ أو أكثر')],src:['auditc']},
+{id:'ab',dim:'alc',quick:0,t:T('چند وقت یک‌بار در یک نوبت ۶ واحد یا بیشتر مصرف می‌کنید؟ (اگر مصرف نمی‌کنید «هرگز»)','How often do you have six or more drinks on one occasion? ("Never" if you do not drink)','كم مرة تتناول ستة مشروبات أو أكثر في مناسبة واحدة؟ («أبداً» إن كنت لا تشرب)'),
+ opts:[O(0,'هرگز','Never','أبداً'),O(1,'کمتر از ماهی یک بار','Less than monthly','أقل من مرة شهرياً'),O(2,'ماهانه','Monthly','شهرياً'),O(3,'هفتگی','Weekly','أسبوعياً'),O(4,'روزانه یا تقریباً روزانه','Daily or almost daily','يومياً أو شبه يومي')],src:['auditc','audit']},
+// ---- mental well-being (WHO-5, last two weeks) ----
+{id:'m1',dim:'mind',quick:1,t:T('در دو هفته گذشته: «احساس شادابی و روحیه خوب داشته‌ام»','Over the last two weeks: "I have felt cheerful and in good spirits"','خلال الأسبوعين الماضيين: «شعرت بالبهجة وبمعنويات جيدة»'),opts:W5,src:['who5']},
+{id:'m2',dim:'mind',quick:0,t:T('در دو هفته گذشته: «احساس آرامش و آسودگی داشته‌ام»','Over the last two weeks: "I have felt calm and relaxed"','خلال الأسبوعين الماضيين: «شعرت بالهدوء والاسترخاء»'),opts:W5,src:['who5']},
+{id:'m3',dim:'mind',quick:0,t:T('در دو هفته گذشته: «احساس فعال بودن و نیرو داشته‌ام»','Over the last two weeks: "I have felt active and vigorous"','خلال الأسبوعين الماضيين: «شعرت بالنشاط والحيوية»'),opts:W5,src:['who5']},
+{id:'m4',dim:'mind',quick:0,t:T('در دو هفته گذشته: «سرحال و استراحت‌کرده از خواب بیدار شده‌ام»','Over the last two weeks: "I woke up feeling fresh and rested"','خلال الأسبوعين الماضيين: «استيقظت وأنا أشعر بالانتعاش والراحة»'),opts:W5,src:['who5']},
+{id:'m5',dim:'mind',quick:1,t:T('در دو هفته گذشته: «زندگی روزمره‌ام پر از چیزهای جالب برای من بوده است»','Over the last two weeks: "My daily life has been filled with things that interest me"','خلال الأسبوعين الماضيين: «كانت حياتي اليومية مليئة بأشياء تثير اهتمامي»'),opts:W5,src:['who5']},
+// ---- sedentary ----
+{id:'sit',dim:'sed',quick:1,t:T('در یک روز معمولی چند ساعت می‌نشینید یا لم می‌دهید؟ (غیر از خواب)','On a typical day, how many hours do you spend sitting or reclining? (not counting sleep)','في يوم عادي، كم ساعة تقضيها جالساً أو مستلقياً؟ (دون النوم)'),
+ opts:[O(100,'کمتر از ۴ ساعت','Under 4 h','أقل من ٤ ساعات'),O(80,'۴ تا ۶ ساعت','4 to 6 h','٤ إلى ٦ ساعات'),O(55,'۶ تا ۸ ساعت','6 to 8 h','٦ إلى ٨ ساعات'),O(35,'۸ تا ۱۰ ساعت','8 to 10 h','٨ إلى ١٠ ساعات'),O(15,'بیش از ۱۰ ساعت','Over 10 h','أكثر من ١٠ ساعات')],src:['who_pa']},
+{id:'scr',dim:'sed',quick:0,t:T('روزانه چند ساعت در اوقات فراغت جلوی صفحه نمایش هستید؟ (تلویزیون، موبایل، بازی)','How many hours a day do you spend on screens in your free time? (TV, phone, games)','كم ساعة يومياً تقضيها أمام الشاشات في أوقات الفراغ؟ (تلفاز، هاتف، ألعاب)'),
+ opts:[O(100,'کمتر از ۲ ساعت','Under 2 h','أقل من ساعتين'),O(75,'۲ تا ۴ ساعت','2 to 4 h','٢ إلى ٤ ساعات'),O(45,'۴ تا ۶ ساعت','4 to 6 h','٤ إلى ٦ ساعات'),O(20,'بیش از ۶ ساعت','Over 6 h','أكثر من ٦ ساعات')],src:['who_pa']},
+// ---- body & prevention ----
+{id:'h',dim:'body',quick:1,num:{min:120,max:230,unit:'cm'},t:T('قد شما چقدر است؟','What is your height?','ما طولك؟'),src:['who_obes']},
+{id:'w',dim:'body',quick:1,num:{min:30,max:250,unit:'kg'},t:T('وزن شما چقدر است؟','What is your weight?','ما وزنك؟'),src:['who_obes']},
+{id:'wc',dim:'body',quick:0,num:{min:50,max:200,unit:'cm'},t:T('دور کمر شما چقدر است؟ (با متر نواری، در سطح ناف، پس از بازدم عادی)','What is your waist circumference? (tape measure at navel level, after a normal breath out)','ما محيط خصرك؟ (بشريط القياس عند مستوى السرة بعد زفير عادي)'),src:['waist']},
+{id:'chk',dim:'body',quick:0,t:T('آخرین بار فشار خون یا چکاپ پزشکی شما کی بوده است؟','When did you last have your blood pressure measured or a medical check-up?','متى كانت آخر مرة قِيس فيها ضغط دمك أو أجريت فحصاً طبياً؟'),
+ opts:[O(100,'در ۱۲ ماه گذشته','Within the last 12 months','خلال آخر ١٢ شهراً'),O(60,'۱ تا ۲ سال پیش','1 to 2 years ago','قبل سنة إلى سنتين'),O(20,'بیش از ۲ سال پیش یا هرگز','More than 2 years ago or never','أكثر من سنتين أو لم يحدث قط')],src:['who_obes']},
+];
+// ---------- Recommendations: imp = shown when score < 70, keep = when >= 70. Every item cites SRC keys. ----------
+const REC={
+act:{src:['who_pa','who_pa_fs'],
+ imp:{fa:['هدف WHO برای بزرگسالان: ۱۵۰ تا ۳۰۰ دقیقه فعالیت متوسط یا ۷۵ تا ۱۵۰ دقیقه فعالیت شدید در هفته، یا ترکیب معادل. هر مقدار حرکتی بهتر از هیچ است؛ از ۱۰ دقیقه پیاده‌روی تند در روز شروع کنید و هر هفته کمی اضافه کنید.','حداقل ۲ روز در هفته تمرین تقویت عضلات اصلی بدن (پا، لگن، کمر، شکم، سینه، شانه، بازو) اضافه کنید.','فعالیت شدید معادل دو برابر فعالیت متوسط حساب می‌شود (۱ دقیقه شدید ≈ ۲ دقیقه متوسط).'],
+  en:['WHO target for adults: 150 to 300 min of moderate or 75 to 150 min of vigorous activity per week, or an equivalent mix. Some activity beats none; start with 10 minutes of brisk walking a day and add a little each week.','Add muscle-strengthening work for the major muscle groups on at least 2 days a week.','Vigorous minutes count double (1 vigorous minute is about 2 moderate minutes).'],
+  ar:['هدف المنظمة للبالغين: ١٥٠ إلى ٣٠٠ دقيقة نشاطاً متوسطاً أو ٧٥ إلى ١٥٠ دقيقة نشاطاً شديداً أسبوعياً أو مزيجاً معادلاً. أي نشاط أفضل من لا شيء؛ ابدأ بـ١٠ دقائق مشياً سريعاً يومياً وزد قليلاً كل أسبوع.','أضف تمارين تقوية العضلات الرئيسية في يومين على الأقل أسبوعياً.','الدقيقة الشديدة تُحسب بدقيقتين متوسطتين تقريباً.']},
+ keep:{fa:['میزان فعالیت شما با توصیه WHO هم‌خوان است. تنوع (هوازی و قدرتی) و ثبات را حفظ کنید.'],en:['Your activity level meets the WHO recommendation. Keep a mix of aerobic and strength work, and stay consistent.'],ar:['مستوى نشاطك يوافق توصية المنظمة. حافظ على التنوع بين الهوائي والقوة وعلى الاستمرارية.']}},
+diet:{src:['who_diet','who_nut_eu'],
+ imp:{fa:['حداقل ۴۰۰ گرم (۵ وعده) میوه و سبزی در روز بخورید. سیب‌زمینی و ریشه‌های نشاسته‌ای جزو آن نیستند.','قند آزاد را زیر ۱۰٪ انرژی روزانه نگه دارید (حدود ۵۰ گرم یا ۱۲ قاشق چای‌خوری برای ۲۰۰۰ کیلوکالری)؛ زیر ۵٪ فواید بیشتری دارد. نوشیدنی شیرین را با آب جایگزین کنید.','نمک را زیر ۵ گرم در روز (حدود یک قاشق چای‌خوری) نگه دارید و از نمک ید‌دار استفاده کنید.','حبوبات، مغزها و غلات کامل را روزانه بخورید و چربی‌های اشباع و ترانس را با چربی‌های غیراشباع (ماهی، آووکادو، مغزها، روغن‌های گیاهی) عوض کنید.'],
+  en:['Eat at least 400 g (5 portions) of fruit and vegetables a day. Potatoes and starchy roots do not count.','Keep free sugars under 10% of daily energy (about 50 g or 12 teaspoons on 2000 kcal); under 5% gives extra benefit. Swap sugary drinks for water.','Keep salt under 5 g a day (about one teaspoon) and use iodized salt.','Eat legumes, nuts and whole grains daily, and replace saturated and trans fats with unsaturated fats (fish, avocado, nuts, plant oils).'],
+  ar:['تناول ٤٠٠ غرام على الأقل (٥ حصص) من الفاكهة والخضروات يومياً. لا تُحسب البطاطا والجذور النشوية.','أبقِ السكريات الحرة دون ١٠٪ من الطاقة اليومية (نحو ٥٠ غراماً أو ١٢ ملعقة صغيرة لكل ٢٠٠٠ سعرة)؛ ودون ٥٪ فائدة إضافية. استبدل المشروبات المحلاة بالماء.','أبقِ الملح دون ٥ غرامات يومياً (نحو ملعقة صغيرة) واستخدم الملح المعالج باليود.','تناول البقوليات والمكسرات والحبوب الكاملة يومياً، واستبدل الدهون المشبعة والمتحولة بدهون غير مشبعة (سمك، أفوكادو، مكسرات، زيوت نباتية).']},
+ keep:{fa:['الگوی غذایی شما به توصیه‌های WHO نزدیک است. به هدف ۴۰۰ گرم میوه و سبزی، قند آزاد زیر ۱۰٪ و نمک زیر ۵ گرم پایبند بمانید.'],en:['Your eating pattern is close to WHO advice. Keep to 400 g of fruit and vegetables, free sugars under 10% of energy and salt under 5 g.'],ar:['نمطك الغذائي قريب من إرشادات المنظمة. حافظ على ٤٠٠ غرام من الفاكهة والخضروات وسكريات حرة دون ١٠٪ وملح دون ٥ غرامات.']}},
+sleep:{src:['sleep'],
+ imp:{fa:['اجماع AASM و SRS: بزرگسالان ۱۸ تا ۶۰ سال باید به‌طور منظم ۷ ساعت یا بیشتر بخوابند؛ خواب کمتر از ۷ ساعت با افزایش خطر چاقی، دیابت، فشار خون، بیماری قلبی و افسردگی همراه است.','ساعت خواب و بیداری را ثابت نگه دارید (حتی آخر هفته‌ها)، اتاق را تاریک و خنک کنید و ساعات پایانی شب نور صفحه نمایش و کافئین را کم کنید.','اگر با وجود خواب کافی خسته‌اید یا خروپف شدید و توقف نفس دارید، برای بررسی اختلال خواب به پزشک مراجعه کنید.'],
+  en:['AASM and SRS consensus: adults aged 18 to 60 should regularly sleep 7 hours or more; under 7 hours is linked to higher risk of obesity, diabetes, hypertension, heart disease and depression.','Keep fixed sleep and wake times (weekends too), make the room dark and cool, and cut screens and caffeine late in the day.','If you feel tired despite enough sleep, or have loud snoring and breathing pauses, see a doctor about a sleep disorder.'],
+  ar:['إجماع AASM وSRS: ينبغي للبالغين بين ١٨ و٦٠ عاماً النوم ٧ ساعات أو أكثر بانتظام؛ والنوم أقل من ٧ ساعات يرتبط بزيادة خطر السمنة والسكري وارتفاع الضغط وأمراض القلب والاكتئاب.','ثبّت موعد النوم والاستيقاظ (حتى في العطلة)، واجعل الغرفة مظلمة وباردة، وقلل الشاشات والكافيين في آخر النهار.','إن شعرت بالتعب رغم النوم الكافي أو كان لديك شخير شديد وتوقف تنفس فراجع الطبيب لتقييم اضطراب النوم.']},
+ keep:{fa:['مدت و کیفیت خواب شما مطلوب است. نظم ساعت خواب را حفظ کنید.'],en:['Your sleep duration and quality look good. Keep your schedule regular.'],ar:['مدة نومك وجودته جيدتان. حافظ على انتظام جدولك.']}},
+tob:{src:['who_tob','who_quit'],
+ imp:{fa:['هیچ سطح بی‌خطری برای مصرف دخانیات وجود ندارد. WHO اعلام می‌کند تنباکو تا نیمی از مصرف‌کنندگانی را که ترک نکنند می‌کشد.','ترک سودمند است: خطر بیماری قلبی بعد از یک سال حدود نصف می‌شود و پس از ۱۵ سال به سطح فرد غیرسیگاری نزدیک می‌شود. با مشاوره و دارو شانس ترک موفق بیش از دو برابر می‌شود؛ با پزشک یا خط ترک ملی مشورت کنید.','جایگزینی با سیگار الکترونیک یا قلیان ترک محسوب نمی‌شود. از دود دست‌دوم دوری کنید و خانه و خودرو را بدون دود نگه دارید.'],
+  en:['No level of tobacco use is safe. WHO states that tobacco kills up to half of users who do not quit.','Quitting pays off: heart disease risk roughly halves after one year and approaches a non-smoker\'s after 15 years. Counselling plus medication more than doubles the chance of quitting; talk to a doctor or a national quit line.','Switching to e-cigarettes or waterpipe is not quitting. Avoid second-hand smoke and keep home and car smoke-free.'],
+  ar:['لا يوجد مستوى آمن لاستخدام التبغ. تفيد المنظمة بأن التبغ يقتل ما يصل إلى نصف المستخدمين الذين لا يقلعون.','الإقلاع مجدٍ: ينخفض خطر أمراض القلب إلى النصف تقريباً بعد سنة ويقترب من خطر غير المدخن بعد ١٥ سنة. الإرشاد مع الدواء يضاعف فرص الإقلاع أكثر من مرتين؛ تحدث إلى طبيب أو خط وطني للإقلاع.','التحول إلى السجائر الإلكترونية أو النرجيلة ليس إقلاعاً. تجنب الدخان السلبي وأبقِ المنزل والسيارة خاليين من التدخين.']},
+ keep:{fa:['از دخانیات دور هستید؛ بهترین انتخاب برای قلب و ریه. از دود دست‌دوم هم دوری کنید.'],en:['You are away from tobacco, the best choice for heart and lungs. Keep avoiding second-hand smoke too.'],ar:['أنت بعيد عن التبغ، وهو أفضل خيار للقلب والرئتين. استمر في تجنب الدخان السلبي أيضاً.']}},
+alc:{src:['who_alc','auditc','audit'],
+ imp:{fa:['WHO در ۲۰۲۳ اعلام کرد هیچ مقدار الکلی بدون اثر بر سلامت نیست و خطر سرطان از اولین نوشیدنی شروع می‌شود؛ هرچه کمتر، ایمن‌تر.','مصرف را کم کنید یا قطع کنید. تعیین سقف هفتگی، روزهای بدون الکل و نوشیدن آهسته به کاهش کمک می‌کند.','نمره بالا در AUDIT-C نشانه نیاز به ارزیابی بیشتر است. اگر مصرف سنگین یا روزانه دارید، قطع ناگهانی بدون نظر پزشک می‌تواند خطرناک باشد؛ با پزشک مشورت کنید.'],
+  en:['In 2023 WHO stated that no amount of alcohol is free of health effects and cancer risk starts with the first drink; the less you drink, the safer.','Cut down or stop. Weekly limits, alcohol-free days and slower drinking help.','A high AUDIT-C score signals the need for fuller assessment. If you drink heavily or daily, stopping suddenly without medical advice can be dangerous; talk to a doctor.'],
+  ar:['أعلنت المنظمة عام ٢٠٢٣ أنه لا توجد كمية من الكحول بلا أثر على الصحة وأن خطر السرطان يبدأ من أول مشروب؛ كلما قلّ الشرب كان أسلم.','قلّل أو توقف. تحديد سقف أسبوعي وأيام خالية من الكحول والشرب ببطء تساعد.','الدرجة العالية في AUDIT-C إشارة إلى الحاجة لتقييم أوسع. إن كنت تشرب بكثرة أو يومياً فقد يكون التوقف المفاجئ دون إشراف طبي خطيراً؛ استشر طبيباً.']},
+ keep:{fa:['عدم مصرف الکل یا مصرف بسیار کم با توصیه WHO سازگار است. بدون الکل بهترین حالت است.'],en:['Not drinking, or drinking very little, fits WHO advice. No alcohol is the safest choice.'],ar:['الامتناع أو الشرب القليل جداً يتوافق مع إرشادات المنظمة. عدم الشرب هو الخيار الأسلم.']}},
+mind:{src:['who5'],
+ imp:{fa:['نمره WHO-5 زیر ۵۲٪ (خام زیر ۱۳ از ۲۵) نشانه بهزیستی پایین و دلیل ارزیابی بیشتر برای افسردگی است؛ این ابزار تشخیص نیست.','با فردی مورد اعتماد صحبت کنید و در صورت ادامه حال بد بیش از دو هفته، به روان‌شناس یا پزشک مراجعه کنید. اگر افکار آسیب به خود دارید، همین حالا با اورژانس یا یک مرکز بحران تماس بگیرید.','خواب منظم، فعالیت بدنی و ارتباط اجتماعی بر بهزیستی اثر مثبت دارند.'],
+  en:['A WHO-5 score under 52% (raw under 13 of 25) indicates low well-being and a reason to assess further for depression; the tool is not a diagnosis.','Talk to someone you trust, and see a psychologist or doctor if low mood lasts more than two weeks. If you have thoughts of harming yourself, contact emergency services or a crisis line now.','Regular sleep, physical activity and social contact support well-being.'],
+  ar:['درجة WHO-5 دون ٥٢٪ (الخام دون ١٣ من ٢٥) تدل على انخفاض الرفاه وسبب لمزيد من التقييم للاكتئاب؛ الأداة ليست تشخيصاً.','تحدث إلى شخص تثق به، وراجع أخصائياً نفسياً أو طبيباً إن استمر المزاج المنخفض أكثر من أسبوعين. إن راودتك أفكار إيذاء النفس فاتصل بالطوارئ أو بخط الأزمات الآن.','النوم المنتظم والنشاط البدني والتواصل الاجتماعي تدعم الرفاه.']},
+ keep:{fa:['بهزیستی روانی شما در محدوده مطلوب است. روال‌هایی که به شما کمک می‌کنند را حفظ کنید و هر دو هفته یک بار خودارزیابی را تکرار کنید.'],en:['Your mental well-being is in a good range. Keep the routines that help you and repeat the check every couple of weeks.'],ar:['رفاهك النفسي في نطاق جيد. حافظ على الروتين المفيد وكرر الفحص كل أسبوعين تقريباً.']}},
+sed:{src:['who_pa'],
+ imp:{fa:['WHO توصیه می‌کند زمان نشستن را کم کنید و جایگزین آن را با فعالیت بدنی از هر شدتی کنید؛ برای نشستن عدد آستانه دقیقی تعیین نشده است.','هر ۳۰ تا ۶۰ دقیقه چند دقیقه بایستید یا راه بروید و زمان تفریحی جلوی صفحه نمایش را محدود کنید.'],
+  en:['WHO advises limiting sedentary time and replacing it with physical activity of any intensity; it gives no precise numeric threshold for sitting.','Stand or walk for a few minutes every 30 to 60 minutes and limit recreational screen time.'],
+  ar:['توصي المنظمة بتقليل وقت الخمول واستبداله بنشاط بدني بأي شدة؛ ولم تحدد رقماً دقيقاً للجلوس.','قف أو امشِ بضع دقائق كل ٣٠ إلى ٦٠ دقيقة وحدّ من وقت الشاشات الترفيهي.']},
+ keep:{fa:['زمان نشستن شما محدود است؛ حرکت‌های کوتاه در طول روز را ادامه دهید.'],en:['Your sitting time is limited; keep taking short movement breaks.'],ar:['وقت جلوسك محدود؛ استمر في فترات الحركة القصيرة.']}},
+body:{src:['who_obes','waist'],
+ imp:{fa:['BMI سالم برای بزرگسالان ۱۸٫۵ تا ۲۴٫۹ است. دور کمر مردان ۹۴ سانتی‌متر یا بیشتر و زنان ۸۰ سانتی‌متر یا بیشتر نشانه نیاز به جلوگیری از افزایش وزن است و ۱۰۲ و ۸۸ سانتی‌متر یا بیشتر نشانه نیاز به کاهش وزن (برای جمعیت‌های آسیایی آستانه‌ها پایین‌تر است).','تغییر آهسته و پایدار در تغذیه و فعالیت بدنی مؤثرتر از رژیم‌های سخت است. در صورت وزن کم (BMI زیر ۱۸٫۵) علت را با پزشک بررسی کنید.','فشار خون و قند و چربی خون را دست‌کم هر سال یا طبق توصیه پزشک کنترل کنید.'],
+  en:['A healthy adult BMI is 18.5 to 24.9. Waist of 94 cm or more (men) or 80 cm or more (women) signals the need to avoid further weight gain, and 102 cm / 88 cm or more the need to lose weight (thresholds are lower for Asian populations).','Slow, sustained changes in diet and activity beat crash diets. If underweight (BMI under 18.5), look into the cause with a doctor.','Check blood pressure, blood sugar and lipids at least yearly or as your doctor advises.'],
+  ar:['مؤشر كتلة الجسم الصحي للبالغين ١٨٫٥ إلى ٢٤٫٩. محيط الخصر ٩٤ سم فأكثر (رجال) أو ٨٠ سم فأكثر (نساء) يدل على الحاجة لتجنب زيادة الوزن، و١٠٢ سم / ٨٨ سم فأكثر يدل على الحاجة لإنقاص الوزن (العتبات أقل للسكان الآسيويين).','التغييرات البطيئة المستدامة في الغذاء والنشاط أفضل من الحميات القاسية. إن كان وزنك ناقصاً (المؤشر دون ١٨٫٥) فابحث السبب مع طبيب.','افحص ضغط الدم والسكر والدهون سنوياً على الأقل أو وفق نصيحة طبيبك.']},
+ keep:{fa:['شاخص‌های بدنی و مراقبت‌های پیشگیرانه شما مطلوب است. چکاپ‌های دوره‌ای را ادامه دهید.'],en:['Your body measures and preventive care look good. Keep up periodic check-ups.'],ar:['قياسات جسمك ورعايتك الوقائية جيدة. استمر في الفحوص الدورية.']}},
+};
+// ---------- Scoring logic (pure functions) ----------
+SRC.whf={t:'World Heart Federation: Tobacco and cardiovascular disease (benefits of quitting)',u:'https://world-heart-federation.org/heart-health/tobacco/'};
+REC.tob.src.push('whf');
+const clamp=(x,a=0,b=100)=>Math.max(a,Math.min(b,x));
+{const rest=QS.filter(q=>q.dim!=='alc'),a=QS.filter(q=>q.dim==='alc');QS.length=0;QS.push(...rest,...a);}
+const qById=Object.fromEntries(QS.map(q=>[q.id,q]));
+function activeQs(mode){return QS.filter(q=>(mode==='full'||q.quick)&&!(S.skipAlc&&q.dim==='alc'));}
+function rawVal(id,ans){const q=qById[id],x=ans[id];if(x===undefined||x===null||x==='')return undefined;if(q.opts)return q.opts[x]?q.opts[x].v:undefined;const n=Number(x);return isFinite(n)?n:undefined;}
+function wavg(pairs){let s=0,w=0;for(const [v,wt] of pairs){if(v===undefined)continue;s+=v*wt;w+=wt;}return w?s/w:undefined;}
+function bmiScore(b){return b<16?25:b<17?40:b<18.5?70:b<25?100:b<30?65:b<35?35:15;}
+function compute(S){
+  const g=id=>rawVal(id,S.ans), full=S.mode==='full', male=S.sex==='m', preg=!!S.preg, flags=[];
+  const D={};
+  // physical activity: WHO 150-300 min moderate or 75-150 vigorous (vigorous counts double)
+  const mod=g('mod'),vig=g('vig');let aer;
+  if(mod!==undefined&&vig!==undefined){const eq=mod+2*vig;aer=eq>=300?100:eq>=150?80+20*(eq-150)/150:80*eq/150;}
+  const st=g('str'),strS=st===undefined?undefined:st>=2?100:st===1?50:0;
+  const wk=g('walk'),wS=wk===undefined?undefined:Math.min(wk/30,1)*100;
+  D.act=wavg([[aer,.6],[strS,.25],[wS,.15]]);
+  // nutrition
+  const fv=g('fv');
+  D.diet=wavg([[fv===undefined?undefined:Math.min(fv/5,1)*100,1],[g('sug'),1],[g('legume'),1],[g('fish'),1],[g('procf'),1],[g('salt'),1]]);
+  // sleep
+  D.sleep=wavg([[g('sh'),2],[g('sq'),1],[g('sreg'),1]]);
+  // tobacco: current use caps the dimension
+  const ts=g('ts');let tb=wavg([[ts,3],[g('tq'),1.5],[g('tsh'),1]]);
+  if(tb!==undefined&&ts!==undefined&&ts<=30)tb=Math.min(tb,30);
+  D.tob=tb;
+  // alcohol: AUDIT-C (0-12). quick form has 2 items, scaled x1.5
+  const af=S.skipAlc?undefined:g('af'),aq=g('aq'),ab=g('ab');let alc,auditc;
+  if(af!==undefined){
+    if(af===0){alc=100;auditc=0;}
+    else{auditc=full?af+(aq||0)+(ab||0):(af+(aq||0))*1.5;alc=clamp(100-15*auditc);
+      if(auditc>=(male?4:3))flags.push('alcHazard');if(auditc>=8)flags.push('alcHigh');}
+    if(preg&&af>0){alc=0;flags.push('alcPreg');}
+  }
+  D.alc=alc;
+  // WHO-5 (percentage = raw x 4)
+  const ids=full?['m1','m2','m3','m4','m5']:['m1','m5'];const mv=ids.map(g);
+  if(mv.every(v=>v!==undefined)){const mean=mv.reduce((a,b)=>a+b,0)/mv.length;D.mind=mean*20;
+    if(D.mind<52||(full&&mv.some(v=>v<=1)))flags.push('mental');}
+  // sedentary
+  D.sed=wavg([[g('sit'),2],[g('scr'),1]]);
+  // body & prevention
+  const h=g('h'),w=g('w'),wc=g('wc');let bmi,bS,wcS;
+  if(h&&w){bmi=w/Math.pow(h/100,2);if(!preg)bS=bmiScore(bmi);}
+  if(wc!==undefined&&!preg){const c1=male?94:80,c2=male?102:88;wcS=wc<c1?100:wc<c2?60:25;}
+  D.body=wavg([[bS,.4],[wcS,.35],[g('chk'),.25]]);
+  // overall: weighted mean over answered dimensions
+  let sw=0,sum=0;for(const k in DIMS){if(D[k]===undefined)continue;sw+=DIMS[k].w;sum+=DIMS[k].w*D[k];}
+  const overall=sw?sum/sw:0, pm=full?5:8;
+  const red=[];if(D.tob!==undefined&&D.tob<40)red.push('tob');if(D.alc!==undefined&&D.alc<=40)red.push('alc');if(D.mind!==undefined&&D.mind<52)red.push('mind');
+  let vk;
+  if(red.length)vk=overall>=55?'vModerate':'vPoor';
+  else vk=overall>=70?'vHealthy':overall>=55?'vMostly':overall>=40?'vModerate':'vPoor';
+  const vc={vHealthy:'v-good',vMostly:'v-warn',vModerate:'v-warn',vPoor:'v-bad'}[vk];
+  const order=Object.keys(D).filter(k=>D[k]!==undefined&&D[k]<70).sort((a,b)=>(100-D[b])*DIMS[b].w-(100-D[a])*DIMS[a].w);
+  return {D,overall,lo:clamp(overall-pm),hi:clamp(overall+pm),vk,vc,red,flags,bmi,order,auditc};
+}
+const lvl=s=>s>=70?'good':s>=40?'warn':'bad';
+// quick self-test of the scoring (kept small; runs once)
+(function(){
+  const t=(S)=>compute(S);
+  const best={mode:'full',sex:'m',ans:{mod:4,vig:3,str:3,walk:3,fv:4,sug:0,legume:0,fish:0,procf:0,salt:0,sh:3,sq:0,sreg:0,ts:0,tq:0,tsh:0,af:0,aq:0,ab:0,m1:5,m2:5,m3:5,m4:5,m5:5,sit:0,scr:0,h:175,w:70,wc:80,chk:0}};
+  const worst={mode:'full',sex:'m',ans:{mod:0,vig:0,str:0,walk:0,fv:0,sug:3,legume:3,fish:3,procf:3,salt:3,sh:0,sq:4,sreg:3,ts:4,tq:3,tsh:2,af:4,aq:4,ab:4,m1:0,m2:0,m3:0,m4:0,m5:0,sit:4,scr:3,h:175,w:130,wc:120,chk:2}};
+  window.__selftest={best:t(best).overall,worst:t(worst).overall,bestV:t(best).vk,worstV:t(worst).vk};
+})();
+// ---------- UI ----------
+const X={
+ theme:{light:{fa:'روشن',en:'Light',ar:'فاتح'},dark:{fa:'تیره',en:'Dark',ar:'داكن'}},
+ ageNote:{fa:'این ابزار برای بزرگسالان ۱۸ سال به بالا طراحی شده است.',en:'This tool is designed for adults aged 18 and over.',ar:'صُممت هذه الأداة للبالغين من ١٨ عاماً فأكثر.'},
+ range:{fa:'عدد معتبر وارد کنید ({a} تا {b})',en:'Enter a valid number ({a} to {b})',ar:'أدخل رقماً صحيحاً ({a} إلى {b})'},
+ bmi:{fa:'شاخص توده بدنی',en:'BMI',ar:'مؤشر كتلة الجسم'},
+ priorities:{fa:'سه اولویت اول شما',en:'Your top priorities',ar:'أهم أولوياتك'},
+ allGood:{fa:'همه ابعاد در محدوده مطلوب‌اند.',en:'All dimensions are in a good range.',ar:'جميع الأبعاد في نطاق جيد.'},
+ sexQ:{fa:'جنسیت زیستی (برای آستانه‌های دور کمر و الکل)',en:'Sex (for waist and alcohol thresholds)',ar:'الجنس (لعتبات الخصر والكحول)'},
+};
+let S={lang:'fa',mode:'quick',step:'intro',qi:0,age:'',sex:'',preg:false,chronic:false,ans:{}};
+let theme='auto';
+try{const l=localStorage.getItem('hls_lang');if(l&&LANGS[l])S.lang=l;const th=localStorage.getItem('hls_theme');if(th)theme=th;}catch(e){}
+const L=o=>o[S.lang];
+const fmt=(n,d=0)=>new Intl.NumberFormat(LANGS[S.lang].loc,{maximumFractionDigits:d}).format(n);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fill=(s,o)=>s.replace(/\{(\w+)\}/g,(_,k)=>o[k]);
+const $=s=>document.querySelector(s);
+const app=()=>$('#app');
+const CONTACT={email:'hhlrctmu@gmail.com',tel:'02182883550'};
+const ic=n=>`<svg class="ico" aria-hidden="true"><use href="#i-${n}"/></svg>`;
+const ld=str=>S.lang==='en'?str:str.replace(/\d/g,d=>new Intl.NumberFormat(LANGS[S.lang].loc,{useGrouping:false}).format(+d));
+function footerHtml(){
+  return `<section class="card contact" id="contact" aria-labelledby="ct"><svg class="clogo" viewBox="0 0 215 170" aria-hidden="true"><use href="#emblem"/></svg>
+  <div class="stack" style="gap:8px;min-width:0"><h2 id="ct" style="margin:0">${esc(L(UI.contactT))}</h2>
+  <div class="cname">${esc(L(UI.center))}</div><p class="hint" style="margin:0">${esc(L(UI.builtBy))}</p>
+  <div class="crow">${ic('pin')}<span class="ck">${esc(L(UI.addrL))}</span><span class="cv">${esc(L(UI.addr))}</span><span></span></div>
+  <div class="crow">${ic('mail')}<span class="ck">${esc(L(UI.emailL))}</span><a class="cv" dir="ltr" style="text-align:start" href="mailto:${CONTACT.email}">${CONTACT.email}</a><button type="button" class="cp" data-act="copy" data-v="email">${esc(L(UI.copy))}</button></div>
+  <div class="crow">${ic('phone')}<span class="ck">${esc(L(UI.telL))}</span><a class="cv" dir="ltr" style="text-align:start" href="tel:${CONTACT.tel}">${ld('021-82883550')}</a><button type="button" class="cp" data-act="copy" data-v="tel">${esc(L(UI.copy))}</button></div>
+  </div></section><p class="fine">${esc(L(UI.disc))}</p>`;
+}
+function chrome(){
+  const d=document.documentElement;d.setAttribute('lang',S.lang);d.setAttribute('dir',LANGS[S.lang].dir);
+  if(theme==='auto')d.removeAttribute('data-theme');else d.setAttribute('data-theme',theme);
+  $('#brandName').textContent=L(UI.brand);$('#brandSub').textContent=L(UI.center);document.title=L(UI.brand);
+  $('#langSeg').innerHTML=Object.keys(LANGS).map(k=>`<button type="button" data-act="lang" data-v="${k}" aria-pressed="${k===S.lang}" lang="${k}">${LANGS[k].n}</button>`).join('');
+  const isDark=theme==='dark'||(theme==='auto'&&matchMedia('(prefers-color-scheme:dark)').matches);
+  $('#themeSeg').innerHTML=['light','dark'].map(k=>`<button type="button" data-act="theme" data-v="${k}" aria-pressed="${(k==='dark')===isDark}">${L(X.theme[k])}</button>`).join('');
+  $('#foot').innerHTML=footerHtml();
+}
+function ageOk(){const a=Number(S.age);return Number.isInteger(a)&&a>=18&&a<=100;}
+function introView(){
+  const m=(k,t,d)=>`<button type="button" class="mode" data-act="mode" data-v="${k}" aria-pressed="${S.mode===k}"><b>${ic(k)}${esc(L(t))}</b><span>${esc(L(d))}</span></button>`;
+  const sx=(k,t)=>`<button type="button" data-act="sex" data-v="${k}" aria-pressed="${S.sex===k}">${esc(L(t))}</button>`;
+  const opt=(id,txt,on)=>`<label class="opt ${on?'on':''}" for="${id}"><input type="checkbox" id="${id}" ${on?'checked':''}><span>${esc(txt)}</span></label>`;
+  app().innerHTML=`<section class="stack">
+    <div><h1>${esc(L(UI.h1))}</h1><p class="lead">${esc(L(UI.lead))}</p></div>
+    <div class="card stack">
+      <h2>${esc(L(UI.modeT))}</h2>
+      <div class="grid2">${m('quick',UI.quick,UI.quickD)}${m('full',UI.full,UI.fullD)}</div>
+      <h2>${esc(L(UI.profileT))}</h2>
+      <div class="grid2">
+        <div class="field"><label for="age">${esc(L(UI.age))}</label><input id="age" type="number" inputmode="numeric" min="18" max="100" value="${esc(S.age)}"><span class="hint" id="ageHint">${S.age!==''&&!ageOk()?esc(L(X.ageNote)):''}</span></div>
+        <div class="field"><span class="lbl">${esc(L(X.sexQ))}</span><div class="seg" role="group">${sx('m',UI.male)}${sx('f',UI.female)}</div></div>
+      </div>
+      <h2>${esc(L(UI.specialT))}</h2>
+      <div class="stack" style="gap:8px">${S.sex==='f'?opt('preg',L(UI.pregnant),S.preg):''}${opt('chronic',L(UI.chronic),S.chronic)}<span class="hint">${esc(L(UI.specialD))}</span></div>
+      <div class="row"><button type="button" class="btn fwd" id="startBtn" data-act="start" ${ageOk()&&S.sex?'':'disabled'}>${esc(L(UI.begin))}${ic('arrow')}</button></div>
+    </div></section>`;
+}
+function answered(q){const x=S.ans[q.id];if(q.opts)return x!==undefined;const n=Number(x);return x!==undefined&&x!==''&&n>=q.num.min&&n<=q.num.max;}
+function qView(){
+  const qs=activeQs(S.mode),q=qs[S.qi],n=qs.length;
+  let body;
+  if(q.opts){
+    body=`<div class="opts" role="radiogroup" aria-label="${esc(L(q.t))}">`+q.opts.map((o,i)=>{const on=S.ans[q.id]===i;
+      return `<label class="opt ${on?'on':''}"><input type="radio" name="q" value="${i}" ${on?'checked':''}><span>${esc(L(o.t))}</span></label>`;}).join('')+`</div>`;
+  }else{
+    const u=q.num.unit==='cm'?UI.cm:UI.kg;
+    body=`<div class="field" style="margin-top:12px;max-width:260px"><label for="num">${esc(L(u))}</label><input id="num" type="number" inputmode="decimal" min="${q.num.min}" max="${q.num.max}" value="${esc(S.ans[q.id]??'')}"><span class="hint" id="numHint"></span></div>`;
+  }
+  app().innerHTML=`<section class="stack">
+    <div class="stack" style="gap:8px"><div class="meta"><span>${esc(fill(L(UI.qOf),{a:fmt(S.qi+1),b:fmt(n)}))}</span><span class="chip">${ic(q.dim)}${esc(L(DIMS[q.dim]))}</span></div>
+    <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="${n}" aria-valuenow="${S.qi+1}"><i style="width:${(S.qi+1)/n*100}%"></i></div></div>
+    <div class="card"><h2 id="qh" tabindex="-1">${esc(L(q.t))}</h2>${q.dim==='alc'?`<div class="notice" style="margin-top:12px">${ic('info')}<span>${esc(L(UI.alcPriv))}</span></div>`:''}${body}${q.dim==='alc'?`<div style="margin-top:12px"><button type="button" class="btn ghost" data-act="skipalc">${esc(L(UI.alcSkip))}</button></div>`:''}</div>
+    <div class="row between"><button type="button" class="btn ghost back" data-act="prev">${ic('arrow')}${esc(L(UI.back))}</button>
+    <button type="button" class="btn fwd" id="nextBtn" data-act="next" ${answered(q)?'':'disabled'}>${esc(S.qi===n-1?L(UI.finish):L(UI.next))}${ic('arrow')}</button></div></section>`;
+}
+// ----- charts -----
+function ringSvg(score){
+  const r=54,c=2*Math.PI*r,col=`var(--${lvl(score)})`;
+  return `<svg class="ring" viewBox="0 0 140 140" width="150" height="150" role="img" aria-label="${esc(fmt(Math.round(score)))}%"><circle cx="70" cy="70" r="${r}" fill="none" stroke="var(--line)" stroke-width="11"/><circle cx="70" cy="70" r="${r}" fill="none" stroke="${col}" stroke-width="11" stroke-linecap="round" stroke-dasharray="${c*score/100} ${c}" transform="rotate(-90 70 70)"/><text x="70" y="72" text-anchor="middle" font-size="34" font-weight="800">${esc(fmt(Math.round(score)))}</text><text x="70" y="96" text-anchor="middle" font-size="13" style="fill:var(--muted)">%</text></svg>`;
+}
+function radarSvg(D){
+  const keys=Object.keys(DIMS),N=keys.length,cx=170,cy=160,R=100;
+  const pt=(i,v)=>{const a=-Math.PI/2+i*2*Math.PI/N;return [cx+R*v/100*Math.cos(a),cy+R*v/100*Math.sin(a)];};
+  let g='';for(const rv of [25,50,75,100])g+=`<polygon points="${keys.map((_,i)=>pt(i,rv).join(',')).join(' ')}" fill="none" stroke="var(--line)" stroke-width="1"/>`;
+  keys.forEach((_,i)=>{g+=`<line x1="${cx}" y1="${cy}" x2="${pt(i,100)[0]}" y2="${pt(i,100)[1]}" stroke="var(--line)" stroke-width="1"/>`;});
+  const poly=keys.map((k,i)=>pt(i,D[k]??0).join(',')).join(' ');
+  g+=`<polygon points="${poly}" fill="var(--accent)" fill-opacity=".22" stroke="var(--accent)" stroke-width="2.2" stroke-linejoin="round"/>`;
+  keys.forEach((k,i)=>{const [x,y]=pt(i,D[k]??0);g+=`<circle cx="${x}" cy="${y}" r="3.6" fill="var(--accent)"/>`;
+    const [lx,ly]=pt(i,128),anc=Math.abs(lx-cx)<8?'middle':lx>cx?'start':'end';
+    g+=`<text x="${lx}" y="${ly+4}" text-anchor="${anc}">${esc(L(DIMS[k]))}</text>`;});
+  return `<svg class="radar" viewBox="0 0 340 320" width="100%" role="img" aria-label="${esc(L(UI.radarT))}">${g}</svg>`;
+}
+function srcList(keys){
+  const u=[...new Set(keys)].filter(k=>SRC[k]);
+  return `<ul class="src" style="margin:6px 0 0;padding-inline-start:18px">`+u.map(k=>`<li dir="ltr" style="text-align:start"><a href="${SRC[k].u}" target="_blank" rel="noopener noreferrer">${esc(SRC[k].t)}</a></li>`).join('')+`</ul>`;
+}
+function resultView(){
+  const R=compute(S),D=R.D;
+  const dimRows=Object.keys(DIMS).filter(k=>D[k]!==undefined).map(k=>{const s=D[k],c=lvl(s);
+    return `<div class="dim"><div class="dn">${ic(k)}<b>${esc(L(DIMS[k]))}</b> <span class="hint">${esc(L(UI.weight))}: ${esc(fmt(DIMS[k].w))}%</span></div><span class="n" style="color:var(--${c})">${esc(fmt(Math.round(s)))}</span><div class="bar"><i style="width:${s}%;background:var(--${c})"></i></div></div>`;}).join('');
+  const notes=[];
+  if(S.mode==='quick')notes.push(L(UI.quickNote));
+  if(R.flags.includes('mental'))notes.push(L(UI.flagMental));
+  if(S.skipAlc)notes.push(L(UI.alcSkipNote));if(S.preg)notes.push(L(UI.pregNote));
+  if(S.chronic)notes.push(L(UI.chronicNote));
+  const pr=R.order.slice(0,3).map(k=>L(DIMS[k])).join('، ').replace(/،/g,S.lang==='en'?',':'،');
+  const recs=R.order.map(k=>{const c=lvl(D[k]);return `<div class="rec ${c}"><h3>${ic(k)}${esc(L(DIMS[k]))} <span class="hint">(${esc(fmt(Math.round(D[k])))}%${k==='alc'&&R.auditc!==undefined?' · AUDIT-C '+esc(fmt(R.auditc,1))+'/12':''}${k==='body'&&R.bmi?' · '+esc(L(X.bmi))+' '+esc(fmt(R.bmi,1)):''})</span></h3><ul>${L(REC[k].imp).map(t=>`<li>${esc(t)}</li>`).join('')}</ul><div class="src"><b>${esc(L(UI.src))}</b> · ${esc(L(UI.acc))}</div>${srcList(REC[k].src)}</div>`;}).join('');
+  const keeps=Object.keys(D).filter(k=>D[k]!==undefined&&D[k]>=70).map(k=>`<div class="rec good"><h3>${ic(k)}${esc(L(DIMS[k]))} <span class="hint">(${esc(fmt(Math.round(D[k])))}%)</span></h3><p>${esc(L(REC[k].keep)[0])}</p>${srcList(REC[k].src.slice(0,1))}</div>`).join('');
+  app().innerHTML=`<section class="stack">
+    <div class="card hero"><div>${ringSvg(R.overall)}</div><div class="stack" style="gap:8px">
+      <div class="hint">${esc(L(UI.overall))}</div><div><span class="verdict ${R.vc}">${esc(L(UI[R.vk]))}</span></div>
+      <div>${esc(L(UI.range))}: <b>${esc(fmt(Math.round(R.lo)))}–${esc(fmt(Math.round(R.hi)))}%</b></div>
+      <div class="hint">${esc(L(UI.vNote))}</div></div></div>
+    ${notes.map(n=>`<div class="notice">${ic('info')}<span>${esc(n)}</span></div>`).join('')}
+    <div class="grid2"><div class="card"><h2>${esc(L(UI.radarT))}</h2>${radarSvg(D)}</div><div class="card"><h2>${esc(L(UI.dimsT))}</h2><div class="dims">${dimRows}</div></div></div>
+    <div class="card"><h2>${esc(L(UI.recT))}</h2><p><b>${esc(L(X.priorities))}:</b> ${R.order.length?esc(pr):esc(L(X.allGood))}</p>${recs}${S.skipAlc?`<div class="rec"><h3>${ic('alc')}${esc(L(DIMS.alc))}</h3><p>${esc(L(UI.alcGen))}</p>${srcList(['who_alc'])}</div>`:''}${keeps?`<h3 style="margin-top:14px">${esc(L(UI.keep))}</h3>${keeps}`:''}</div>
+    <details><summary>${esc(L(UI.methodT))}</summary><p style="margin-top:10px">${esc(L(UI.methodP))}</p><p>${esc(L(UI.limits))}</p><p>${esc(L(UI.rangeNote))}</p></details>
+    <div class="row"><button type="button" class="btn" id="pdfBtn" data-act="pdf">${ic('dl')}${esc(L(UI.pdf))}</button><button type="button" class="btn ghost" data-act="again">${ic('redo')}${esc(L(UI.again))}</button></div>
+    <div class="hint" id="pdfMsg" role="status"></div></section>`;
+  window.__R=R;
+}
+function render(){chrome();if(S.step==='intro')introView();else if(S.step==='q')qView();else resultView();}
+// ---------- PDF report: canvas pages (so Persian/Arabic shaping and RTL come from the browser) -> jsPDF ----------
+async function buildPdf(){
+  const R=window.__R||compute(S),rtl=LANGS[S.lang].dir==='rtl',W=1240,H=1754,M=90,F='Vazirmatn, Tahoma, sans-serif';
+  await Promise.all(['400','700','800'].map(w=>document.fonts.load(`${w} 24px Vazirmatn`,'ابجد abc 123')));
+  const pages=[];let cv,ctx,y;
+  const newPage=()=>{cv=document.createElement('canvas');cv.width=W;cv.height=H;ctx=cv.getContext('2d');ctx.fillStyle='#FFFFFF';ctx.fillRect(0,0,W,H);pages.push(cv);y=M;};
+  const pick=l=>({good:'#2B8050',warn:'#A8690A',bad:'#BE3A2E'}[l]);
+  function text(str,o={}){
+    const size=o.size||26,weight=o.weight||400,color=o.color||'#13261A',r=o.rtl===undefined?rtl:o.rtl,lh=size*1.65,ind=o.indent||0;
+    ctx.font=`${weight} ${size}px ${F}`;ctx.fillStyle=color;ctx.direction=r?'rtl':'ltr';ctx.textAlign=r?'right':'left';
+    const maxW=W-2*M-ind,x=r?W-M-ind:M+ind,lines=[];let cur='';
+    for(const word of String(str).split(' ')){
+      let w=word;
+      while(ctx.measureText(w).width>maxW){let i=w.length;while(i>1&&ctx.measureText(w.slice(0,i)).width>maxW)i--;if(cur){lines.push(cur);cur='';}lines.push(w.slice(0,i));w=w.slice(i);}
+      const t=cur?cur+' '+w:w;
+      if(ctx.measureText(t).width>maxW&&cur){lines.push(cur);cur=w;}else cur=t;
+    }
+    if(cur)lines.push(cur);
+    for(const ln of lines){if(y+lh>H-M){newPage();ctx.font=`${weight} ${size}px ${F}`;ctx.fillStyle=color;ctx.direction=r?'rtl':'ltr';ctx.textAlign=r?'right':'left';}
+      ctx.fillText(ln,x,y+size);y+=lh;}
+    y+=o.gap||0;
+  }
+  newPage();
+  try{
+    const raw=document.getElementById('emblem').innerHTML.replace(/var\(--brand\)/g,'#1E6332').replace(/var\(--gold\)/g,'#C2921C');
+    const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="314 195 215 170" width="430" height="340">${raw}</svg>`;
+    const img=new Image();await new Promise((ok,no)=>{img.onload=ok;img.onerror=no;img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);});
+    ctx.drawImage(img,rtl?W-M-150:M,y,150,119);y+=134;
+  }catch(e){}
+  text(L(UI.center),{size:24,weight:700,color:'#C2921C',gap:4});
+  ctx.fillStyle='#C2921C';ctx.fillRect(M,y,W-2*M,3);y+=20;
+  text(L(UI.brand)+' · '+L(UI.tagline),{size:44,weight:800,color:'#1E6332',gap:4});
+  text(new Date().toLocaleDateString(LANGS[S.lang].loc,{year:'numeric',month:'long',day:'numeric'})+' · '+L(S.mode==='full'?UI.full:UI.quick),{size:22,color:'#586E72',gap:22});
+  text(L(UI.overall),{size:24,color:'#586E72'});
+  text(`${fmt(Math.round(R.overall))}%`,{size:84,weight:800,color:pick(lvl(R.overall))});
+  text(L(UI[R.vk]),{size:32,weight:700,color:pick(lvl(R.overall)),gap:2});
+  text(`${L(UI.range)}: ${fmt(Math.round(R.lo))}–${fmt(Math.round(R.hi))}%`,{size:24,gap:6});
+  text(L(UI.vNote),{size:21,color:'#586E72',gap:22});
+  text(L(UI.dimsT),{size:32,weight:800,gap:8});
+  for(const k of Object.keys(DIMS)){const s=R.D[k];if(s===undefined)continue;
+    if(y+70>H-M)newPage();
+    ctx.font=`700 26px ${F}`;ctx.fillStyle='#13261A';ctx.direction=rtl?'rtl':'ltr';
+    ctx.textAlign=rtl?'right':'left';ctx.fillText(L(DIMS[k]),rtl?W-M:M,y+26);
+    ctx.fillStyle=pick(lvl(s));ctx.textAlign=rtl?'left':'right';ctx.fillText(fmt(Math.round(s)),rtl?M:W-M,y+26);
+    const bw=W-2*M,by=y+40;ctx.fillStyle='#D5E1E0';ctx.fillRect(M,by,bw,14);ctx.fillStyle=pick(lvl(s));
+    const fw=bw*s/100;ctx.fillRect(rtl?W-M-fw:M,by,fw,14);y+=76;}
+  y+=14;
+  const notes=[];if(S.mode==='quick')notes.push(L(UI.quickNote));if(R.flags.includes('mental'))notes.push(L(UI.flagMental));if(S.skipAlc)notes.push(L(UI.alcSkipNote));if(S.preg)notes.push(L(UI.pregNote));if(S.chronic)notes.push(L(UI.chronicNote));
+  for(const n of notes)text('• '+n,{size:22,color:'#A8690A',gap:8});
+  y+=10;text(L(UI.recT),{size:32,weight:800,gap:8});
+  const lines=[...R.order];
+  for(const k of lines){
+    text(`${L(DIMS[k])} (${fmt(Math.round(R.D[k]))}%)`,{size:27,weight:800,color:pick(lvl(R.D[k]))});
+    for(const t of L(REC[k].imp))text('• '+t,{size:23,indent:0,gap:4});
+    text(L(UI.src)+' ('+L(UI.acc)+')',{size:19,weight:700,color:'#586E72'});
+    for(const s of new Set(REC[k].src)){text(SRC[s].t,{size:18,color:'#586E72',rtl:false});text(SRC[s].u,{size:18,color:'#1E6332',rtl:false,gap:4});}
+    y+=12;
+  }
+  y+=10;text(L(UI.methodT),{size:28,weight:800});text(L(UI.methodP),{size:21,color:'#586E72',gap:6});text(L(UI.limits),{size:21,color:'#586E72',gap:10});
+  text(L(UI.disc),{size:21,weight:700,color:'#13261A',gap:20});
+  text(L(UI.contactT),{size:28,weight:800,color:'#1E6332'});
+  text(L(UI.center),{size:23,weight:700});text(L(UI.builtBy),{size:20,color:'#586E72'});
+  text(`${L(UI.addrL)}: ${L(UI.addr)}`,{size:21});
+  text(`${L(UI.emailL)}: ${CONTACT.email}`,{size:21,rtl:false});text(`${L(UI.telL)}: ${CONTACT.tel}`,{size:21,rtl:false});
+  const {jsPDF}=window.jspdf;const pdf=new jsPDF({unit:'mm',format:'a4',compress:true});
+  pages.forEach((c,i)=>{if(i)pdf.addPage();pdf.addImage(c.toDataURL('image/jpeg',0.9),'JPEG',0,0,210,297);});
+  return pdf.output('arraybuffer');
+}
+async function doPdf(){
+  const msg=$('#pdfMsg'),btn=$('#pdfBtn');
+  try{
+    const dl=await (window.claude&&window.claude.use?window.claude.use('downloads'):null);
+    if(!dl){msg.textContent=L(UI.pdfNA);return;}
+    btn.disabled=true;msg.textContent=L(UI.pdfBusy);
+    const buf=await buildPdf();
+    await dl.save({filename:`healthy-lifestyle-report-${new Date().toISOString().slice(0,10)}.pdf`,data:buf});
+    msg.textContent='';
+  }catch(e){msg.textContent=(e&&e.code==='declined')?'':L(UI.pdfFail);}
+  finally{if(btn)btn.disabled=false;}
+}
+// ---------- events ----------
+function go(step){S.step=step;render();try{window.scrollTo(0,0);}catch(e){}const h=$('#qh');if(h)h.focus({preventScroll:true});}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-act]');if(!b)return;const a=b.dataset.act,v=b.dataset.v;
+  if(a==='lang'){S.lang=v;try{localStorage.setItem('hls_lang',v);}catch(_){}render();}
+  else if(a==='theme'){theme=v;try{localStorage.setItem('hls_theme',v);}catch(_){}render();}
+  else if(a==='mode'){S.mode=v;render();}
+  else if(a==='sex'){S.sex=v;if(v!=='f')S.preg=false;render();}
+  else if(a==='start'){S.qi=0;go('q');}
+  else if(a==='prev'){if(S.qi===0)go('intro');else{S.qi--;go('q');}}
+  else if(a==='next'){const n=activeQs(S.mode).length;if(S.qi===n-1)go('result');else{S.qi++;go('q');}}
+  else if(a==='again'){S.ans={};S.skipAlc=false;S.qi=0;go('intro');}
+  else if(a==='skipalc'){S.skipAlc=true;go('result');}
+  else if(a==='pdf')doPdf();
+  else if(a==='copy'){const txt=CONTACT[v];
+    Promise.resolve().then(()=>navigator.clipboard.writeText(txt)).then(()=>{b.textContent=L(UI.copied);setTimeout(()=>{b.textContent=L(UI.copy);},1500);}).catch(()=>{});}
+});
+document.addEventListener('change',e=>{
+  const t=e.target;
+  if(t.name==='q'){const q=activeQs(S.mode)[S.qi];S.ans[q.id]=Number(t.value);
+    document.querySelectorAll('.opt').forEach(l=>l.classList.toggle('on',l.contains(t)));$('#nextBtn').disabled=false;}
+  else if(t.id==='preg'||t.id==='chronic'){S[t.id]=t.checked;t.closest('.opt').classList.toggle('on',t.checked);}
+});
+document.addEventListener('input',e=>{
+  const t=e.target;
+  if(t.id==='age'){S.age=t.value;$('#startBtn').disabled=!(ageOk()&&S.sex);$('#ageHint').textContent=(S.age!==''&&!ageOk())?L(X.ageNote):'';}
+  else if(t.id==='num'){const q=activeQs(S.mode)[S.qi];S.ans[q.id]=t.value;const ok=answered(q);
+    $('#nextBtn').disabled=!ok;$('#numHint').textContent=(t.value!==''&&!ok)?fill(L(X.range),{a:fmt(q.num.min),b:fmt(q.num.max)}):'';}
+});
+render();
+
+</script>
+
+</body></html>
