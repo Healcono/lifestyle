@@ -166,6 +166,8 @@ footer{margin-top:28px;display:flex;flex-direction:column;gap:14px}
 const LANGS={fa:{n:'فارسی',dir:'rtl',loc:'fa-IR'},en:{n:'EN',dir:'ltr',loc:'en-US'},ar:{n:'العربية',dir:'rtl',loc:'ar-EG'}};
 const UI={
 brand:{fa:'سبک زندگی',en:'Lifestyle',ar:'نمط الحياة'},
+dlFallback:{fa:'دانلود مستقیم در این نمایش ممکن نیست. صفحه‌های گزارش را در زیر می‌بینید: روی هر صفحه نگه دارید یا راست‌کلیک کنید و ذخیره کنید. همچنین می‌توانید متن گزارش را کپی کنید. اگر لینک را در خود claude.ai باز کنید، ممکن است دانلود PDF فعال باشد.',en:'Direct download is not possible in this view. The report pages are shown below: press and hold or right-click a page to save it. You can also copy the report text. If you open the link on claude.ai itself, PDF download may be available.',ar:'التنزيل المباشر غير ممكن في هذا العرض. تظهر صفحات التقرير أدناه: اضغط مطولاً أو انقر بالزر الأيمن على الصفحة لحفظها. يمكنك أيضاً نسخ نص التقرير. إذا فتحت الرابط على claude.ai نفسه فقد يتوفر تنزيل PDF.'},
+copyReport:{fa:'کپی متن گزارش',en:'Copy report text',ar:'نسخ نص التقرير'},
 alcPriv:{fa:'این پرسش فقط برای ارزیابی سلامت است، نه قضاوت. پاسخ شما فقط در همین مرورگر پردازش می‌شود و جایی ثبت یا ارسال نمی‌شود. می‌توانید آن را رد کنید.',en:'This question is only for health assessment, not judgement. Your answer is processed only in this browser and is never recorded or sent anywhere. You may skip it.',ar:'هذا السؤال لتقييم الصحة فقط وليس للحكم. تُعالَج إجابتك في هذا المتصفح فقط ولا تُسجَّل ولا تُرسَل إلى أي مكان. يمكنك تخطيه.'},
 alcSkip:{fa:'ترجیح می‌دهم پاسخ ندهم',en:'I prefer not to answer',ar:'أفضّل عدم الإجابة'},
 alcSkipNote:{fa:'بُعد الکل پاسخ داده نشد و در امتیاز کلی لحاظ نشده است؛ امتیاز بر پایه بقیه ابعاد محاسبه شد.',en:'You skipped the alcohol dimension, so it is left out and the score is based on the other dimensions.',ar:'تخطيت بُعد الكحول، لذا لم يُحتسب وبُنيت الدرجة على بقية الأبعاد.'},
@@ -644,19 +646,37 @@ async function buildPdf(){
   text(`${L(UI.addrL)}: ${L(UI.addr)}`,{size:21});
   text(`${L(UI.emailL)}: ${CONTACT.email}`,{size:21,rtl:false});text(`${L(UI.telL)}: ${CONTACT.tel}`,{size:21,rtl:false});
   const jp=pages.map(c=>{const bin=atob(c.toDataURL('image/jpeg',0.9).split(',')[1]),u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return u;});
-  return makePdf(jp,W,H);
+  window.__pages=pages;return makePdf(jp,W,H);
+}
+function reportText(){
+  const R=window.__R||compute(S),o=[];
+  o.push(L(UI.brand)+' · '+L(UI.center));
+  o.push(L(UI.overall)+': '+fmt(Math.round(R.overall))+'% ('+L(UI[R.vk])+')');
+  for(const k of Object.keys(DIMS))if(R.D[k]!==undefined)o.push('- '+L(DIMS[k])+': '+fmt(Math.round(R.D[k])));
+  o.push('');
+  for(const k of R.order){o.push(L(DIMS[k]));L(REC[k].imp).forEach(t=>o.push('• '+t));[...new Set(REC[k].src)].forEach(x=>o.push('  '+SRC[x].t+' — '+SRC[x].u));o.push('');}
+  o.push(L(UI.disc));o.push(L(UI.emailL)+': '+CONTACT.email+' | '+L(UI.telL)+': '+CONTACT.tel);
+  return o.join('\n');
+}
+function showFallback(msg){
+  const imgs=(window.__pages||[]).map((c,i)=>'<img alt="'+esc(L(UI.brand))+' '+(i+1)+'" src="'+c.toDataURL('image/jpeg',0.85)+'" style="width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:8px;margin-top:10px">').join('');
+  msg.innerHTML='<div class="notice">'+ic('info')+'<span>'+esc(L(UI.dlFallback))+'</span></div>'
+   +'<div class="row" style="margin-top:10px"><button type="button" class="btn ghost" data-act="copyreport">'+esc(L(UI.copyReport))+'</button></div>'
+   +'<textarea id="rtext" readonly rows="6" dir="auto" style="width:100%;margin-top:10px;font:inherit;font-size:12.5px;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:10px">'+esc(reportText())+'</textarea>'+imgs;
 }
 async function doPdf(){
   const msg=$('#pdfMsg'),btn=$('#pdfBtn');
+  btn.disabled=true;msg.textContent=L(UI.pdfBusy);
   try{
     const dl=await (window.claude&&window.claude.use?window.claude.use('downloads'):null);
-    if(!dl){msg.textContent=L(UI.pdfNA);return;}
-    btn.disabled=true;msg.textContent=L(UI.pdfBusy);
     const buf=await buildPdf();
-    await dl.save({filename:`healthy-lifestyle-report-${new Date().toISOString().slice(0,10)}.pdf`,data:buf});
-    msg.textContent='';
-  }catch(e){msg.textContent=(e&&e.code==='declined')?'':L(UI.pdfFail)+' ['+String((e&&(e.code||e.message))||e).slice(0,70)+']';}
-  finally{if(btn)btn.disabled=false;}
+    if(dl){
+      try{await dl.save({filename:'healthy-lifestyle-report-'+new Date().toISOString().slice(0,10)+'.pdf',data:buf});msg.textContent='';return;}
+      catch(e){if(e&&e.code==='declined'){msg.textContent='';return;}}
+    }
+    showFallback(msg);
+  }catch(e){msg.textContent=L(UI.pdfFail)+' ['+String((e&&(e.code||e.message))||e).slice(0,70)+']';}
+  finally{btn.disabled=false;}
 }
 // ---------- events ----------
 function go(step){S.step=step;render();try{window.scrollTo(0,0);}catch(e){}const h=$('#qh');if(h)h.focus({preventScroll:true});}
@@ -672,6 +692,7 @@ document.addEventListener('click',e=>{
   else if(a==='again'){S.ans={};S.skipAlc=false;S.qi=0;go('intro');}
   else if(a==='skipalc'){S.skipAlc=true;go('result');}
   else if(a==='pdf')doPdf();
+  else if(a==='copyreport'){const ta=document.getElementById('rtext');Promise.resolve().then(()=>navigator.clipboard.writeText(ta.value)).then(()=>{b.textContent=L(UI.copied);}).catch(()=>{ta.focus();ta.select();});}
   else if(a==='copy'){const txt=CONTACT[v];
     Promise.resolve().then(()=>navigator.clipboard.writeText(txt)).then(()=>{b.textContent=L(UI.copied);setTimeout(()=>{b.textContent=L(UI.copy);},1500);}).catch(()=>{});}
 });
