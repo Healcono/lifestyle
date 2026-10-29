@@ -161,7 +161,6 @@ footer{margin-top:28px;display:flex;flex-direction:column;gap:14px}
   <main id="app" class="stack"></main>
   <footer id="foot"></footer>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
 // ---------- UI strings (fa / en / ar) ----------
 const LANGS={fa:{n:'فارسی',dir:'rtl',loc:'fa-IR'},en:{n:'EN',dir:'ltr',loc:'en-US'},ar:{n:'العربية',dir:'rtl',loc:'ar-EG'}};
@@ -221,7 +220,7 @@ methodT:{fa:'روش محاسبه و شفافیت علمی',en:'How the score is 
 methodP:{fa:'هر پاسخ به نمره‌ای از ۰ تا ۱۰۰ تبدیل می‌شود، نمره هر بُعد میانگین پاسخ‌های همان بُعد است و امتیاز کلی میانگین وزنی ابعاد است. آستانه‌ها از منابع بالا گرفته شده‌اند. در دخانیات و الکل، مصرف فعلی سقف امتیاز را پایین می‌آورد، چون این رفتارها اثر خطی و قابل‌جبران با سایر ابعاد ندارند.',en:'Each answer becomes a 0 to 100 score, each dimension is the mean of its answers, and the overall score is a weighted mean of the dimensions. Thresholds come from the sources listed. For tobacco and alcohol, current use caps the score, because these risks cannot be offset by good habits elsewhere.',ar:'تتحول كل إجابة إلى درجة من ٠ إلى ١٠٠، ودرجة كل بُعد هي متوسط إجاباته، والدرجة العامة هي المتوسط الموزون للأبعاد. العتبات مأخوذة من المصادر المذكورة. في التبغ والكحول يخفض الاستخدام الحالي سقف الدرجة لأن هذه المخاطر لا تعوّضها العادات الجيدة الأخرى.'},
 limits:{fa:'محدودیت‌ها: داده‌ها خودگزارشی هستند؛ در نسخه سریع برخی ابزارها (مثل WHO-5 و AUDIT-C) کوتاه‌شده‌اند؛ اوزان ابعاد تصمیم طراحی‌اند و از یک مدل بالینی واحد نیامده‌اند؛ بعضی آستانه‌ها (مثل نشستن) در WHO عدد مشخصی ندارند.',en:'Limits: data are self-reported; the quick version shortens some tools (WHO-5, AUDIT-C); dimension weights are a design choice, not from a single clinical model; some thresholds (such as sitting time) have no numeric WHO cut-off.',ar:'القيود: البيانات مُبلَّغ عنها ذاتياً؛ تختصر النسخة السريعة بعض الأدوات (WHO-5 وAUDIT-C)؛ أوزان الأبعاد قرار تصميمي وليست من نموذج سريري واحد؛ بعض العتبات (مثل الجلوس) ليس لها رقم محدد لدى المنظمة.'},
 disc:{fa:'این ابزار آموزشی و غربالگری است، نه تشخیص یا جایگزین مشاوره پزشکی. اگر علائم نگران‌کننده یا بیماری دارید با پزشک مشورت کنید.',en:'This is an educational screening tool, not a diagnosis or a substitute for medical advice. See a clinician if you have symptoms or a medical condition.',ar:'هذه أداة تثقيفية للفحص وليست تشخيصاً ولا بديلاً عن الاستشارة الطبية. استشر الطبيب إن كانت لديك أعراض أو مرض.'},
-pdf:{fa:'دانلود گزارش PDF',en:'Download PDF report',ar:'تنزيل تقرير PDF'},
+pdf:{fa:'دانلود گزارش PDF (آماده چاپ)',en:'Download PDF report (print-ready)',ar:'تنزيل تقرير PDF (جاهز للطباعة)'},
 pdfBusy:{fa:'در حال ساخت PDF…',en:'Building PDF…',ar:'جارٍ إنشاء PDF…'},
 pdfFail:{fa:'ساخت یا ذخیره PDF ممکن نشد. دوباره تلاش کنید.',en:'The PDF could not be built or saved. Try again.',ar:'تعذّر إنشاء PDF أو حفظه. حاول مرة أخرى.'},
 pdfNA:{fa:'دانلود در این نمایش در دسترس نیست.',en:'Downloads are not available in this view.',ar:'التنزيل غير متاح في هذا العرض.'},
@@ -561,6 +560,26 @@ function resultView(){
 }
 function render(){chrome();if(S.step==='intro')introView();else if(S.step==='q')qView();else resultView();}
 // ---------- PDF report: canvas pages (so Persian/Arabic shaping and RTL come from the browser) -> jsPDF ----------
+// Minimal PDF writer: one full-page JPEG per A4 page (no external library needed)
+function makePdf(jpegs,wpx,hpx){
+  const enc=new TextEncoder(),parts=[],offs=[];let len=0;
+  const push=b=>{const u=typeof b==='string'?enc.encode(b):b;parts.push(u);len+=u.length;};
+  const obj=(n,head,stream)=>{offs[n]=len;push(n+' 0 obj\n'+head+'\n');if(stream){push('stream\n');push(stream);push('\nendstream\n');}push('endobj\n');};
+  const N=jpegs.length;
+  push('%PDF-1.4\n');
+  obj(1,'<< /Type /Catalog /Pages 2 0 R >>');
+  obj(2,'<< /Type /Pages /Kids ['+jpegs.map((_,i)=>(3+3*i)+' 0 R').join(' ')+'] /Count '+N+' >>');
+  jpegs.forEach((j,i)=>{const pg=3+3*i,ct=pg+1,im=pg+2,cs='q 595.28 0 0 841.89 0 0 cm /Im0 Do Q';
+    obj(pg,'<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /XObject << /Im0 '+im+' 0 R >> >> /Contents '+ct+' 0 R >>');
+    obj(ct,'<< /Length '+cs.length+' >>',enc.encode(cs));
+    obj(im,'<< /Type /XObject /Subtype /Image /Width '+wpx+' /Height '+hpx+' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length '+j.length+' >>',j);});
+  const total=3+3*N,xr=len;
+  push('xref\n0 '+total+'\n0000000000 65535 f \n');
+  for(let n=1;n<total;n++)push(String(offs[n]).padStart(10,'0')+' 00000 n \n');
+  push('trailer\n<< /Size '+total+' /Root 1 0 R >>\nstartxref\n'+xr+'\n%%EOF\n');
+  const out=new Uint8Array(len);let p=0;for(const u of parts){out.set(u,p);p+=u.length;}
+  return out.buffer;
+}
 async function buildPdf(){
   const R=window.__R||compute(S),rtl=LANGS[S.lang].dir==='rtl',W=1240,H=1754,M=90,F='Vazirmatn, Tahoma, sans-serif';
   await Promise.all(['400','700','800'].map(w=>document.fonts.load(`${w} 24px Vazirmatn`,'ابجد abc 123')));
@@ -624,9 +643,8 @@ async function buildPdf(){
   text(L(UI.center),{size:23,weight:700});text(L(UI.builtBy),{size:20,color:'#586E72'});
   text(`${L(UI.addrL)}: ${L(UI.addr)}`,{size:21});
   text(`${L(UI.emailL)}: ${CONTACT.email}`,{size:21,rtl:false});text(`${L(UI.telL)}: ${CONTACT.tel}`,{size:21,rtl:false});
-  const {jsPDF}=window.jspdf;const pdf=new jsPDF({unit:'mm',format:'a4',compress:true});
-  pages.forEach((c,i)=>{if(i)pdf.addPage();pdf.addImage(c.toDataURL('image/jpeg',0.9),'JPEG',0,0,210,297);});
-  return pdf.output('arraybuffer');
+  const jp=pages.map(c=>{const bin=atob(c.toDataURL('image/jpeg',0.9).split(',')[1]),u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return u;});
+  return makePdf(jp,W,H);
 }
 async function doPdf(){
   const msg=$('#pdfMsg'),btn=$('#pdfBtn');
@@ -637,7 +655,7 @@ async function doPdf(){
     const buf=await buildPdf();
     await dl.save({filename:`healthy-lifestyle-report-${new Date().toISOString().slice(0,10)}.pdf`,data:buf});
     msg.textContent='';
-  }catch(e){msg.textContent=(e&&e.code==='declined')?'':L(UI.pdfFail);}
+  }catch(e){msg.textContent=(e&&e.code==='declined')?'':L(UI.pdfFail)+' ['+String((e&&(e.code||e.message))||e).slice(0,70)+']';}
   finally{if(btn)btn.disabled=false;}
 }
 // ---------- events ----------
